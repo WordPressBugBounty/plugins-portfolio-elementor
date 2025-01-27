@@ -6,14 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Image Gallery Element
+ * Powerfolio_Shortcode_Generator
  *
  */
 class Powerfolio_Shortcode_Generator {	
 
     public function __construct() {
-        // allow users to disable this feature if needed
-        $shortcode_generator_enabled = apply_filters( 'powerfolio_shortcode_generator_enabled', true );
+        // I'm disabling this by default for now
+        $shortcode_generator_enabled = apply_filters( 'powerfolio_shortcode_generator_enabled', false );
 
         if ( $shortcode_generator_enabled == true ) {
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_shortcode_generator_scripts' ), 10, 2 );
@@ -22,7 +22,6 @@ class Powerfolio_Shortcode_Generator {
     }
 	
     public function enqueue_shortcode_generator_scripts($hook) {
-        
         $allowed_hooks = apply_filters('powerfolio_allowed_tinymce_hooks', ['post.php', 'post-new.php']);
 
         if ( !in_array($hook, $allowed_hooks, true) ) {
@@ -34,9 +33,6 @@ class Powerfolio_Shortcode_Generator {
 
         // Enqueue Font Awesome
         wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-
-        // Enqueue the shortcode generator script
-        wp_enqueue_script( 'powerfolio-shortcode-generator', plugin_dir_url(__FILE__) . '../assets/js/powerfolio-shortcode-generator.js', array( 'jquery', 'wp-tinymce' ), false, true );
 
         // Prepare hover_options and column_options
         $hover_options = Powerfolio_Common_Settings::get_hover_options();

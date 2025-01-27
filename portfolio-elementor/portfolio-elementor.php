@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: Portfolio & Image Gallery for Elementor | PowerFolio
+Plugin Name: Portfolio & Image Gallery for Elementor | PowerFolio PRO
 Plugin URI: https://powerfoliowp.com
-Description: Create customizable and filterable portfolio and image galleries in seconds using Elementor, Gutenberg blocks, or any page builder!
+Description: Create portfolios and image galleries in seconds using Elementor, Gutenberg blocks, or any page builder!
 Author: PWR Plugins
 Text Domain: powerfolio
-Version: 3.1.2
+Version: 3.1.4
 Author URI: https://pwrplugins.com
 */
 // Exit if accessed directly
@@ -19,13 +19,12 @@ if ( function_exists( 'pe_fs' ) ) {
 } else {
     // DO NOT REMOVE THIS IF, IT IS ESSENTIAL FOR THE `function_exists` CALL ABOVE TO PROPERLY WORK.
     if ( !function_exists( 'pe_fs' ) ) {
-        // ... Freemius integration snippet ...
         // Create a helper function for easy SDK access.
         function pe_fs() {
             global $pe_fs;
             if ( !isset( $pe_fs ) ) {
-                // Include Freemius SDK.
-                require_once dirname( __FILE__ ) . '/freemius/start.php';
+                // Include Composer autoloader
+                require_once dirname( __FILE__ ) . '/vendor/autoload.php';
                 $pe_fs = fs_dynamic_init( array(
                     'id'             => '7226',
                     'slug'           => 'portfolio-elementor',
@@ -145,10 +144,12 @@ if ( !function_exists( 'elpt_fix_packery_layout_themes' ) ) {
         );
     }
 
-    $current_theme = wp_get_theme();
-    if ( $current_theme == 'Betheme' || $current_theme == 'OceanWP' ) {
-        add_action( 'wp_enqueue_scripts', 'elpt_fix_packery_layout_themes', 99999 );
-    }
+    add_action( 'init', function () {
+        $current_theme = wp_get_theme();
+        if ( $current_theme == 'Betheme' || $current_theme == 'OceanWP' ) {
+            add_action( 'wp_enqueue_scripts', 'elpt_fix_packery_layout_themes', 99999 );
+        }
+    } );
 }
 //load textdomain
 if ( !function_exists( 'powerfolio_load_textdomain' ) ) {

@@ -1,11 +1,11 @@
 === Portfolio for Elementor & Image Gallery | PowerFolio ===
 Contributors: dotrex, wppug, rexdot, freemius
 Donate link: 
-Tags: portfolio, filterable portfolio, image gallery, gallery, elementor
+Tags: portfolio, filterable portfolio, portfolio gallery, responsive portfolio, image gallery, gallery, elementor
 Requires at least: 4.0
-Tested up to: 6.6.2
+Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: trunk
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -175,3 +175,4 @@ You can customize it using these options:
 3.1 - Added the paginated grid feature
 3.1.1 - Security Hotfix
 3.1.2 - Update Freemius SDK / Fixed Undefined array key “pagination_postsperpage” PHP error
+3.1.4 - Fixed issues with latest WP update / Updated Freemius SDK
