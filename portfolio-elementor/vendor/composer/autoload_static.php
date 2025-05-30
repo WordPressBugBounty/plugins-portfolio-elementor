@@ -10,6 +10,20 @@ class ComposerStaticInit48b21ca248e157b7d6560e71d4a7aa61
         '8d50dc88e56bace65e1e72f6017983ed' => __DIR__ . '/..' . '/freemius/wordpress-sdk/start.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PowerfolioPlugin\\' => 17,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'PowerfolioPlugin\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classes',
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -17,6 +31,8 @@ class ComposerStaticInit48b21ca248e157b7d6560e71d4a7aa61
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit48b21ca248e157b7d6560e71d4a7aa61::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit48b21ca248e157b7d6560e71d4a7aa61::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit48b21ca248e157b7d6560e71d4a7aa61::$classMap;
 
         }, null, ClassLoader::class);

@@ -1,13 +1,13 @@
 <?php
 
 /*
-Plugin Name: Portfolio & Image Gallery for Elementor | PowerFolio PRO
+Plugin Name: Portfolio & Image Gallery for Elementor | PowerFolio
 Plugin URI: https://powerfoliowp.com
 Description: Create portfolios and image galleries in seconds using Elementor, Gutenberg blocks, or any page builder!
 Author: PWR Plugins
 Text Domain: powerfolio
-Version: 3.1.4
-Author URI: https://pwrplugins.com
+Version: 3.2.0
+Author URI: https://dotrex.co
 */
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) {

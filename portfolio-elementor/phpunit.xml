@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	bootstrap="tests/phpunit/bootstrap.php"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	verbose="true"
+	>
+	<testsuites>
+		<testsuite name="PowerFolio Test Suite">
+			<directory suffix=".php">./tests/phpunit/</directory>
+			<exclude>./tests/phpunit/bootstrap.php</exclude>
+		</testsuite>
+	</testsuites>
+	<coverage>
+		<include>
+			<directory suffix=".php">./classes</directory>
+			<directory suffix=".php">./includes</directory>
+			<directory suffix=".php">./elementor</directory>
+			<file>./portfolio-elementor.php</file>
+		</include>
+		<exclude>
+			<directory>./vendor</directory>
+			<directory>./node_modules</directory>
+			<directory>./tests</directory>
+		</exclude>
+	</coverage>
+</phpunit>

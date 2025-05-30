@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "freemius/wordpress-sdk",
-            "version": "2.10.1",
-            "version_normalized": "2.10.1.0",
+            "version": "2.12.0",
+            "version_normalized": "2.12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Freemius/wordpress-sdk.git",
-                "reference": "5f57de9d7504b37b0ee9f5da44b6699c99854dd2"
+                "reference": "db6f35a2b3d318a53330409dbeab49156ee76dd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/5f57de9d7504b37b0ee9f5da44b6699c99854dd2",
-                "reference": "5f57de9d7504b37b0ee9f5da44b6699c99854dd2",
+                "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/db6f35a2b3d318a53330409dbeab49156ee76dd8",
+                "reference": "db6f35a2b3d318a53330409dbeab49156ee76dd8",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,7 @@
                 "szepeviktor/phpstan-wordpress": "^1.3",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "time": "2024-12-11T11:36:51+00:00",
+            "time": "2025-05-11T07:07:09+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -52,11 +52,11 @@
             ],
             "support": {
                 "issues": "https://github.com/Freemius/wordpress-sdk/issues",
-                "source": "https://github.com/Freemius/wordpress-sdk/tree/2.10.1"
+                "source": "https://github.com/Freemius/wordpress-sdk/tree/2.12.0"
             },
             "install-path": "../freemius/wordpress-sdk"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }

@@ -513,17 +513,45 @@ class Powerfolio_Portfolio {
 			$portfolio_link = get_the_permalink($post['ID']);
 		}
 
-        if ($settings['linkto'] == 'image') {
+        // Determina qual é a configuração de link a ser usada:
+        // 1. Prioriza a configuração individual da imagem ($post['linkto']) se disponível
+        // 2. Usa a configuração global ($settings['linkto']) como fallback
+        $link_type = '';
+        
+        if (array_key_exists('linkto', $post) && !empty($post['linkto'])) {
+            // Usa a configuração específica da imagem
+            $link_type = $post['linkto'];
+        } else if (array_key_exists('linkto', $settings)) {
+            // Usa a configuração global
+            $link_type = $settings['linkto'];
+        }
+        
+        // Processa o link de acordo com o tipo
+        if ($link_type == 'image') {
             $portfolio_link = $portfolio_image;
             $portfolio_link_class = 'elpt-portfolio-lightbox';
             $portfolio_link_rel = 'rel=elpt-portfolio_' . $rel_id;
         } 
-		else if ($settings['linkto'] == 'image_elementor') {
+		else if ($link_type == 'image_elementor') {
             $portfolio_link = $portfolio_image;
             $portfolio_link_class = 'elpt-portfolio-elementor-lightbox';
             $portfolio_link_rel = 'rel="elpt-portfolio_' . $rel_id . '"';
         } 
-		else if ($settings['linkto'] == 'link' && array_key_exists('list_external_link', $post)) {
+		else if ($link_type == 'video' && array_key_exists('video_url', $post) && !empty($post['video_url'])) {
+            // For YouTube and Vimeo videos
+            // Format the video URL for SimpleLightbox to process correctly
+            $video_url = $post['video_url'];
+            
+            // Instead of using the URL directly as link, we'll link to the image
+            // and use data-attributes for the video
+            $portfolio_link = $portfolio_image; // Link to image (for compatibility)
+            $portfolio_link_class = 'elpt-portfolio-video-lightbox';
+            $portfolio_link_rel = 'rel=elpt-portfolio_' . $rel_id;
+            
+            // Add data attributes for video lightbox
+            $portfolio_link_data_video = 'data-video="' . esc_url($video_url) . '"';
+        }
+		else if ($link_type == 'link' && array_key_exists('list_external_link', $post)) {
             $portfolio_link = $post['list_external_link']['url'];
             if ($post['list_external_link']['is_external'] == true) {
                 $portfolio_link_target = 'target="_blank"';
@@ -533,13 +561,21 @@ class Powerfolio_Portfolio {
             }
         }
 
-        return [
+        // Initialize the return array with default values
+        $return_array = [
             'link' => $portfolio_link,
             'target' => $portfolio_link_target,
             'rel' => $portfolio_link_rel,
             'class' => $portfolio_link_class,
             'follow' => $portfolio_link_follow,
         ];
+        
+        // Add data attributes for video if defined
+        if (isset($portfolio_link_data_video)) {
+            $return_array['portfolio_link_data_video'] = $portfolio_link_data_video;
+        }
+        
+        return $return_array;
     }
 
 	/*
@@ -670,9 +706,16 @@ class Powerfolio_Portfolio {
 		$output = '';
 	
 		$output .= '<div class="portfolio-item-wrapper ' . $data['classes'] . '">';
-			$output .= '<a href="' . esc_url($data['link_data']['link']) . '" class="portfolio-item ' . esc_attr($data['link_data']['class']) . '" ' . esc_attr($data['link_data']['rel']) . ' style="background-image: url(' . esc_url($data['portfolio_image']) . ')" title="' . $data['post_title'] . '" ' . $data['link_data']['target'] . ' ' . $data['link_data']['follow'] . '">';
+			
+			// Check if additional data attributes for video exist
+			$video_data_attr = '';
+			if (isset($data['link_data']['portfolio_link_data_video'])) {
+				$video_data_attr = ' ' . $data['link_data']['portfolio_link_data_video'] . ' ';
+			}
+			
+			$output .= '<a href="' . esc_url($data['link_data']['link']) . '" class="portfolio-item ' . esc_attr($data['link_data']['class']) . '" ' . esc_attr($data['link_data']['rel']) . ' style="background-image: url(' . esc_url($data['portfolio_image']) . ')" title="' . esc_attr($data['post_title']) . '" ' . $data['link_data']['target'] . ' ' . $data['link_data']['follow'] . $video_data_attr . '">';
 		
-				$output .= '<img src="' . esc_url($data['portfolio_image']) . '" title="' . $data['post_title'] . '" alt="' . $data['post_title'] . '"/>';
+				$output .= '<img src="' . esc_url($data['portfolio_image']) . '" title="' . esc_attr($data['post_title']) . '" alt="' . esc_attr($data['post_title']) . '"/>';
 				$output .= '<div class="portfolio-item-infos-wrapper" style="background-color:' . ';"><div class="portfolio-item-infos">';
 			
 					// Title

@@ -426,12 +426,15 @@ class ELPT_Image_Gallery_Widget extends Widget_Base {
             'label' => __( 'Advanced', 'powerfolio' ),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
-        $this->add_control( 'custom_js', [
-            'label'    => __( 'Custom JS', 'powerfolio' ),
-            'type'     => \Elementor\Controls_Manager::CODE,
-            'language' => 'javascript',
-            'rows'     => 20,
-        ] );
+        // Custom JS - Restricted to administrators only
+        if ( current_user_can( 'manage_options' ) ) {
+            $this->add_control( 'custom_js', [
+                'label'    => __( 'Custom JS', 'powerfolio' ),
+                'type'     => \Elementor\Controls_Manager::CODE,
+                'language' => 'javascript',
+                'rows'     => 20,
+            ] );
+        }
         $this->add_control( 'Upgrade_note4', [
             'label'           => '',
             'type'            => \Elementor\Controls_Manager::RAW_HTML,
@@ -488,9 +491,15 @@ class ELPT_Image_Gallery_Widget extends Widget_Base {
         $image_gallery = new \Powerfolio_Image_Gallery();
         echo $image_gallery->get_image_gallery_template( $settings );
         ?>
-		<script><?php 
-        echo esc_js( $settings['custom_js'] );
-        ?></script>
+		<?php 
+        if ( !empty( $settings['custom_js'] ) ) {
+            ?>
+	<script><?php 
+            echo wp_kses( $settings['custom_js'], array() );
+            ?></script>
+	<?php 
+        }
+        ?>
 		
 		<?php 
     }

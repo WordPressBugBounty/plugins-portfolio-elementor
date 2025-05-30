@@ -109,8 +109,8 @@ class Powerfolio_Carousel {
 							$classes = join( '  ', get_post_class($postid) ); 
 							
 							$output .='<div class="portfolio-item-wrapper item '.$classes.'">';
-								$output .='<a href="'.esc_url($portfolio_link) .'" class="portfolio-item '.esc_attr($portfolio_link_class) .'" '.esc_attr($portfolio_link_rel) .' style="background-image: url('.esc_url($portfolio_image_ready).')" title="'.get_the_title().'">';
-									$output .='<img src="'.esc_url($portfolio_image_ready) .'" title="'.get_the_title().'" alt="'.get_the_title().'"/>';
+								$output .='<a href="'.esc_url($portfolio_link) .'" class="portfolio-item '.esc_attr($portfolio_link_class) .'" '.esc_attr($portfolio_link_rel) .' style="background-image: url('.esc_url($portfolio_image_ready).')" title="'.esc_attr(get_the_title()).'">';
+									$output .='<img src="'.esc_url($portfolio_image_ready) .'" title="'.esc_attr(get_the_title()).'" alt="'.esc_attr(get_the_title()).'"/>';
 									$output .='<div class="portfolio-item-infos-wrapper" style="background-color:' .';"><div class="portfolio-item-infos">';
 										$output .='<div class="portfolio-item-title">'.get_the_title().'</div>';
 										$output .='<div class="portfolio-item-category">';

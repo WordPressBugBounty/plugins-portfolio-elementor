@@ -5,7 +5,7 @@ Tags: portfolio, filterable portfolio, portfolio gallery, responsive portfolio, 
 Requires at least: 4.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 3.1.4
+Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -176,3 +176,4 @@ You can customize it using these options:
 3.1.1 - Security Hotfix
 3.1.2 - Update Freemius SDK / Fixed Undefined array key “pagination_postsperpage” PHP error
 3.1.4 - Fixed issues with latest WP update / Updated Freemius SDK
+3.2.0 - Added video lightbox support for YouTube and Vimeo / Improved security for Custom JS fields / Fixed lightbox conflicts / Restricted Custom JS field to administrators only
