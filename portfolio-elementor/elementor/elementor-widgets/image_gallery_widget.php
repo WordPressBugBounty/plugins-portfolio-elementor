@@ -124,6 +124,12 @@ class ELPT_Image_Gallery_Widget extends Widget_Base {
                 'url' => \Elementor\Utils::get_placeholder_image_src(),
             ],
         ] );
+        $repeater->add_control( 'list_hover_image', [
+            'label'       => __( 'Hover Image (Optional)', 'powerfolio' ),
+            'type'        => Controls_Manager::MEDIA,
+            'description' => __( 'Image to display on hover. Perfect for GIFs or alternative images. If not set, no hover effect will be applied.', 'powerfolio' ),
+            'default'     => [],
+        ] );
         // END - PRO Version Snippet
         $this->add_control( 'list', [
             'label'       => __( 'Gallery Items', 'Powerfolio' ),

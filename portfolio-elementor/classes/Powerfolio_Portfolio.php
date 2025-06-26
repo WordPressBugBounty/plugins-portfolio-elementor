@@ -643,6 +643,12 @@ class Powerfolio_Portfolio {
 
 				$data['portfolio_image'] = $post['list_image']['url'];
 
+				// Process hover image (backward compatible)
+				$data['hover_image'] = '';
+				if ( array_key_exists('list_hover_image', $post) && !empty($post['list_hover_image']['url']) ) {
+					$data['hover_image'] = $post['list_hover_image']['url'];
+				}
+
 				$tag_array = explode(",", $post['list_filter_tag']);
 
 				$data['classes'] = '';
@@ -713,9 +719,21 @@ class Powerfolio_Portfolio {
 				$video_data_attr = ' ' . $data['link_data']['portfolio_link_data_video'] . ' ';
 			}
 			
-			$output .= '<a href="' . esc_url($data['link_data']['link']) . '" class="portfolio-item ' . esc_attr($data['link_data']['class']) . '" ' . esc_attr($data['link_data']['rel']) . ' style="background-image: url(' . esc_url($data['portfolio_image']) . ')" title="' . esc_attr($data['post_title']) . '" ' . $data['link_data']['target'] . ' ' . $data['link_data']['follow'] . $video_data_attr . '">';
+			// Sanitize title for lightbox to prevent XSS (SimpleLightbox vulnerability fix)
+			$safe_title = wp_strip_all_tags($data['post_title']);
+			$safe_title = esc_attr($safe_title);
+			
+			// Add hover class if hover image exists
+			$hover_class = !empty($data['hover_image']) ? ' elpt-has-hover-image' : '';
+			
+			$output .= '<a href="' . esc_url($data['link_data']['link']) . '" class="portfolio-item ' . esc_attr($data['link_data']['class']) . $hover_class . '" ' . esc_attr($data['link_data']['rel']) . ' style="background-image: url(' . esc_url($data['portfolio_image']) . ')" title="' . $safe_title . '" ' . $data['link_data']['target'] . ' ' . $data['link_data']['follow'] . $video_data_attr . '">';
 		
-				$output .= '<img src="' . esc_url($data['portfolio_image']) . '" title="' . esc_attr($data['post_title']) . '" alt="' . esc_attr($data['post_title']) . '"/>';
+				$output .= '<img src="' . esc_url($data['portfolio_image']) . '" class="elpt-main-image" title="' . $safe_title . '" alt="' . $safe_title . '"/>';
+				
+				// Add hover image if exists (backward compatible)
+				if (!empty($data['hover_image'])) {
+					$output .= '<img src="' . esc_url($data['hover_image']) . '" class="elpt-hover-image" title="' . $safe_title . '" alt="' . $safe_title . '" style="display: none;"/>';
+				}
 				$output .= '<div class="portfolio-item-infos-wrapper" style="background-color:' . ';"><div class="portfolio-item-infos">';
 			
 					// Title

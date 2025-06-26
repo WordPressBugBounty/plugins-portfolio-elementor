@@ -1806,3 +1806,46 @@
 .elpt-portfolio-content.elpt-portfolio-carousel .portfolio-item img {
   display: none;
 }
+
+/* Hover Image Effect - New Feature */
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image .elpt-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block !important;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image .elpt-hover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  display: block !important;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image:hover .elpt-main-image {
+  opacity: 0;
+}
+
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image:hover .elpt-hover-image {
+  opacity: 1;
+}
+
+/* Hide text overlay when hover image is present */
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image .portfolio-item-infos-wrapper {
+  display: none !important;
+}
+
+.elpt-portfolio-content .portfolio-item.elpt-has-hover-image:hover .portfolio-item-infos-wrapper {
+  display: none !important;
+}

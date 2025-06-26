@@ -1,4 +1,69 @@
+// Function to sanitize captions and prevent XSS
+function sanitizeElptCaption(caption) {
+    if (typeof caption !== 'string') return caption;
+    
+    // Remove any HTML to prevent XSS
+    var tempDiv = jQuery('<div>');
+    tempDiv.text(caption);
+    return tempDiv.html(); // Returns escaped text
+}
+
+// Safe function to decode HTML entities without executing JavaScript
+function safeDecodeHtml(str) {
+    if (typeof str !== 'string') return str;
+    
+    // Check if it contains dangerous patterns before decoding
+    var dangerousPatterns = [
+        /&lt;script/i,
+        /&lt;img[^&]*onerror/i,
+        /&lt;[^&]*on\w+=/i,
+        /javascript:/i,
+        /&lt;iframe/i,
+        /&lt;object/i,
+        /&lt;embed/i
+    ];
+    
+    for (var i = 0; i < dangerousPatterns.length; i++) {
+        if (dangerousPatterns[i].test(str)) {
+            // If it contains dangerous patterns, return only text without decoding
+            return str.replace(/&[#\w]+;/g, '').replace(/[<>]/g, '');
+        }
+    }
+    
+    // If it doesn't contain dangerous patterns, decode safely
+    var txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    var decoded = txt.value;
+    
+    // Remove any remaining HTML tags as an extra security measure
+    decoded = decoded.replace(/<[^>]*>/g, '');
+    
+    return decoded;
+}
+
+// Function to sanitize all images in the DOM
+function sanitizeAllImages() {
+    jQuery('.elpt-portfolio img[title], a.elpt-portfolio-lightbox img[title]').each(function() {
+        var $img = jQuery(this);
+        var originalTitle = $img.attr('title');
+        if (originalTitle) {
+            // Decode HTML entities safely, then sanitize
+            var decodedTitle = safeDecodeHtml(originalTitle);
+            var sanitizedTitle = sanitizeElptCaption(decodedTitle);
+            $img.attr('title', sanitizedTitle);
+        }
+    });
+}
+
+// Execute sanitization immediately
+jQuery(document).ready(function() {
+    sanitizeAllImages();
+});
+
 jQuery(window).on('load', function () {
+    // Sanitize again on load
+    sanitizeAllImages();
+    
     if (jQuery(".elpt-portfolio-content").length) {
         
         // Process video links with data attributes
@@ -48,11 +113,64 @@ jQuery(window).on('load', function () {
             }
         });
         
-        // Inicializa lightbox para imagens
-        jQuery('a.elpt-portfolio-lightbox').simpleLightbox({
+        // Sanitize again before initializing lightbox
+        sanitizeAllImages();
+        
+        // Initialize lightbox for images with safe configuration
+        var lightboxInstance = jQuery('a.elpt-portfolio-lightbox').simpleLightbox({
             captions: true,
             disableScroll: false,
             rel: true,
+            // Hook to sanitize captions in real time
+            additionalHtml: false
+        });
+        
+                // Override SimpleLightbox library to use text instead of HTML
+        // Intercepts when captions are added
+        var originalAppendTo = jQuery.fn.appendTo;
+        jQuery.fn.appendTo = function(selector) {
+            var result = originalAppendTo.apply(this, arguments);
+            
+            // If it's a caption being added
+            if (this.hasClass && this.hasClass('sl-caption')) {
+                var captionContent = this.html();
+                if (captionContent) {
+                    var decodedContent = safeDecodeHtml(captionContent);
+                    var sanitizedContent = sanitizeElptCaption(decodedContent);
+                    this.text(sanitizedContent); // Use text() instead of html()
+                }
+            }
+            
+            return result;
+        };
+        
+                // Intercept and sanitize captions dynamically
+        // Observe DOM changes to sanitize new captions
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            var $node = jQuery(node);
+                            if ($node.hasClass('sl-caption') || $node.find('.sl-caption').length > 0) {
+                                var $caption = $node.hasClass('sl-caption') ? $node : $node.find('.sl-caption');
+                                var captionHtml = $caption.html();
+                                if (captionHtml) {
+                                    var decodedCaption = safeDecodeHtml(captionHtml);
+                                    var sanitizedCaption = sanitizeElptCaption(decodedCaption);
+                                    $caption.text(sanitizedCaption); // Use .text() instead of .html()
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Observe changes in the body
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
         });
     }
     

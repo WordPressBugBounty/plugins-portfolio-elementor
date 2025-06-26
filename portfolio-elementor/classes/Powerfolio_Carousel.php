@@ -108,9 +108,13 @@ class Powerfolio_Carousel {
 							
 							$classes = join( '  ', get_post_class($postid) ); 
 							
+							// Sanitize title for lightbox to prevent XSS (SimpleLightbox vulnerability fix)
+							$safe_title = wp_strip_all_tags(get_the_title());
+							$safe_title = esc_attr($safe_title);
+							
 							$output .='<div class="portfolio-item-wrapper item '.$classes.'">';
-								$output .='<a href="'.esc_url($portfolio_link) .'" class="portfolio-item '.esc_attr($portfolio_link_class) .'" '.esc_attr($portfolio_link_rel) .' style="background-image: url('.esc_url($portfolio_image_ready).')" title="'.esc_attr(get_the_title()).'">';
-									$output .='<img src="'.esc_url($portfolio_image_ready) .'" title="'.esc_attr(get_the_title()).'" alt="'.esc_attr(get_the_title()).'"/>';
+								$output .='<a href="'.esc_url($portfolio_link) .'" class="portfolio-item '.esc_attr($portfolio_link_class) .'" '.esc_attr($portfolio_link_rel) .' style="background-image: url('.esc_url($portfolio_image_ready).')" title="'.$safe_title.'">';
+									$output .='<img src="'.esc_url($portfolio_image_ready) .'" title="'.$safe_title.'" alt="'.$safe_title.'"/>';
 									$output .='<div class="portfolio-item-infos-wrapper" style="background-color:' .';"><div class="portfolio-item-infos">';
 										$output .='<div class="portfolio-item-title">'.get_the_title().'</div>';
 										$output .='<div class="portfolio-item-category">';
