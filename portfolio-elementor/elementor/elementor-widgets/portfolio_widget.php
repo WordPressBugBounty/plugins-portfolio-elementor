@@ -36,7 +36,7 @@ class ELPT_Portfolio_Widget extends Widget_Base {
      * @return string Widget title.
      */
     public function get_title() {
-        return __( 'Elementor Portfolio (Powerfolio)', 'powerfolio' );
+        return __( 'Elementor Portfolio (Powerfolio)', 'portfolio-elementor' );
     }
 
     /**
@@ -97,12 +97,12 @@ class ELPT_Portfolio_Widget extends Widget_Base {
     protected function register_controls() {
         //=========== Main Settings	==============
         $this->start_controls_section( 'section_content', [
-            'label' => __( 'General Settings', 'powerfolio' ),
+            'label' => __( 'General Settings', 'portfolio-elementor' ),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
         $this->add_control( 'postsperpage', [
-            'label'       => __( 'Total number of projects to show', 'powerfolio' ),
-            'description' => __( 'Pagination is now available in Powerfolio PRO version!', 'powerfolio' ),
+            'label'       => __( 'Total number of projects to show', 'portfolio-elementor' ),
+            'description' => __( 'Pagination is now available in Powerfolio PRO version!', 'portfolio-elementor' ),
             'type'        => Controls_Manager::NUMBER,
             'default'     => 12,
             'min'         => 1,
@@ -112,14 +112,14 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         // END - PRO Version Snippet
         $showfilter_description = '';
         $this->add_control( 'showfilter', [
-            'label'       => __( 'Show category filter?', 'powerfolio' ),
+            'label'       => __( 'Show category filter?', 'portfolio-elementor' ),
             'description' => $showfilter_description,
             'type'        => Controls_Manager::SELECT,
             'default'     => 'yes',
             'options'     => \Powerfolio_Common_Settings::get_yes_no_options(),
         ] );
         $this->add_control( 'showallbtn', [
-            'label'       => __( 'Show "All" option?', 'powerfolio' ),
+            'label'       => __( 'Show "All" option?', 'portfolio-elementor' ),
             'description' => $showfilter_description,
             'type'        => Controls_Manager::SELECT,
             'default'     => 'yes',
@@ -129,9 +129,9 @@ class ELPT_Portfolio_Widget extends Widget_Base {
             'options'     => \Powerfolio_Common_Settings::get_yes_no_options(),
         ] );
         $this->add_control( 'tax_text', [
-            'label'     => __( 'All Categories - Button Text', '' ),
+            'label'     => __( 'All Categories - Button Text', 'portfolio-elementor' ),
             'type'      => \Elementor\Controls_Manager::TEXT,
-            'default'   => __( 'All', '' ),
+            'default'   => __( 'All', 'portfolio-elementor' ),
             'condition' => [
                 'showfilter' => 'yes',
             ],
@@ -146,14 +146,14 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         //=========== END - Main Settings	==============
         //=========== Grid Settings	==============
         $this->start_controls_section( 'section_grid', [
-            'label' => __( 'Grid Settings', 'powerfolio' ),
+            'label' => __( 'Grid Settings', 'portfolio-elementor' ),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
-        $description = __( 'Upgrade your plan to to enable more grid options, or build your own using the Grid Builder tool, our exclusive feature! <a href="https://checkout.freemius.com/mode/dialog/plugin/7226/plan/12571/">CLICK TO UPGRADE</a><br/><br/<br/> You can also order our customized grid service - for this, please request a quote at dotrex@dotrex.co', 'powerfolio' );
+        $description = __( 'Upgrade your plan to to enable more grid options, or build your own using the Grid Builder tool, our exclusive feature! <a href="https://checkout.freemius.com/mode/dialog/plugin/7226/plan/12571/">CLICK TO UPGRADE</a><br/><br/<br/> You can also order our customized grid service - for this, please request a quote at dotrex@dotrex.co', 'portfolio-elementor' );
         // END - PRO Version Snippet
         //Style
         $this->add_control( 'style', [
-            'label'       => __( 'Grid Style', 'powerfolio' ),
+            'label'       => __( 'Grid Style', 'portfolio-elementor' ),
             'type'        => Controls_Manager::SELECT,
             'default'     => 'box',
             'description' => $description,
@@ -161,7 +161,7 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         ] );
         //columns
         $this->add_control( 'columns', [
-            'label'      => __( 'Number of columns', 'powerfolio' ),
+            'label'      => __( 'Number of columns', 'portfolio-elementor' ),
             'type'       => Controls_Manager::SELECT,
             'default'    => '3',
             'conditions' => array(
@@ -180,45 +180,65 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         ] );
         $margin_description = '';
         $this->add_control( 'margin', [
-            'label'        => __( 'Use item margin?', 'powerfolio' ),
+            'label'        => __( 'Use item margin?', 'portfolio-elementor' ),
             'description'  => $margin_description,
             'type'         => Controls_Manager::SWITCHER,
             'default'      => 'yes',
             'return_value' => 'yes',
             'conditions'   => array(
                 'relation' => 'or',
-                'terms'    => array(array(
-                    'name'     => 'style',
-                    'operator' => '==',
-                    'value'    => 'box',
-                ), array(
-                    'name'     => 'style',
-                    'operator' => '==',
-                    'value'    => 'masonry',
-                ), array(
-                    'name'     => 'style',
-                    'operator' => '==',
-                    'value'    => 'grid_builder',
-                )),
+                'terms'    => array(
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'box',
+                    ),
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'masonry',
+                    ),
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'grid_builder',
+                    ),
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'specialgrid7',
+                    )
+                ),
             ),
         ] );
         //Margin Size
         $this->add_control( 'margin_size', [
-            'label'      => __( 'Additional Margin (px)', 'powerfolio' ),
+            'label'      => __( 'Additional Margin (px)', 'portfolio-elementor' ),
             'type'       => Controls_Manager::SLIDER,
             'size_units' => ['px'],
             'conditions' => array(
-                'relation' => 'or',
+                'relation' => 'and',
                 'terms'    => array(array(
                     'name'     => 'margin',
                     'operator' => '==',
                     'value'    => 'yes',
+                ), array(
+                    'name'     => 'style',
+                    'operator' => '!in',
+                    'value'    => [
+                        'specialgrid1',
+                        'specialgrid2',
+                        'specialgrid3',
+                        'specialgrid4',
+                        'specialgrid5',
+                        'specialgrid6'
+                    ],
                 )),
             ),
             'range'      => [
                 'px' => [
                     'min'  => 0,
-                    'max'  => 20,
+                    'max'  => 60,
                     'step' => 1,
                 ],
             ],
@@ -227,18 +247,21 @@ class ELPT_Portfolio_Widget extends Widget_Base {
                 'size' => 0,
             ],
             'selectors'  => [
-                '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-margin .portfolio-item-wrapper' => 'padding-right: calc(5px + {{SIZE}}{{UNIT}}); padding-left: calc(5px + {{SIZE}}{{UNIT}}); padding-bottom: calc((5px + {{SIZE}}{{UNIT}})*2);',
+                '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-margin:not(.elpt-portfolio-special-grid-7) .portfolio-item-wrapper' => 'padding-right: calc(5px + {{SIZE}}{{UNIT}}); padding-left: calc(5px + {{SIZE}}{{UNIT}}); padding-bottom: calc((5px + {{SIZE}}{{UNIT}})*2);',
+                '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-margin.elpt-portfolio-special-grid-7 .portfolio-item-wrapper'       => 'padding-right: calc(5px + {{SIZE}}{{UNIT}}); padding-left: calc(5px + {{SIZE}}{{UNIT}}); margin-bottom: calc(5px + {{SIZE}}{{UNIT}});',
             ],
         ] );
         //================================== GRID BUILDER ========================
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 60; $i++) {
             //width
             $item = 'item_' . $i;
-            $this->add_control( $item . '_heading', [
-                'label'      => __( 'Item ' . $i . '', 'powerfolio' ),
-                'type'       => \Elementor\Controls_Manager::HEADING,
-                'separator'  => 'before',
-                'conditions' => array(
+            $this->add_control( $item . '_popover_toggle', [
+                'label'        => sprintf( __( 'Item %d', 'portfolio-elementor' ), $i ),
+                'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+                'label_off'    => __( 'Default', 'portfolio-elementor' ),
+                'label_on'     => __( 'Custom', 'portfolio-elementor' ),
+                'return_value' => 'yes',
+                'conditions'   => array(
                     'relation' => 'and',
                     'terms'    => array(array(
                         'name'     => 'style',
@@ -251,19 +274,25 @@ class ELPT_Portfolio_Widget extends Widget_Base {
                     )),
                 ),
             ] );
-            $this->add_control( $item, [
-                'label'      => __( 'Width (%)', 'powerfolio' ),
+            $this->start_popover();
+            $this->add_responsive_control( $item, [
+                'label'      => __( 'Width', 'portfolio-elementor' ),
                 'type'       => Controls_Manager::SLIDER,
-                'size_units' => ['%'],
+                'size_units' => ['%', 'px'],
                 'default'    => [
                     'unit' => '%',
                     'size' => 25,
                 ],
                 'range'      => [
-                    '%' => [
+                    '%'  => [
                         'min'  => 10,
                         'max'  => 100,
                         'step' => 5,
+                    ],
+                    'px' => [
+                        'min'  => 50,
+                        'max'  => 1200,
+                        'step' => 10,
                     ],
                 ],
                 'conditions' => array(
@@ -279,13 +308,14 @@ class ELPT_Portfolio_Widget extends Widget_Base {
                     )),
                 ),
                 'selectors'  => [
-                    '{{WRAPPER}} .elpt-portfolio-content .portfolio-item-wrapper:nth-child(' . $i . ')' => 'width: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .elpt-portfolio-content .portfolio-item-wrapper:nth-child(' . $i . ')'                      => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .elpt-portfolio-content.elpt-fixed-layout-mode .portfolio-item-wrapper.elpt-grid-pos-' . $i => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ] );
             //height
             $itemh = 'item_height_' . $i;
-            $this->add_control( $itemh, [
-                'label'      => __( 'Height (px)', 'powerfolio' ),
+            $this->add_responsive_control( $itemh, [
+                'label'      => __( 'Height (px)', 'portfolio-elementor' ),
                 'type'       => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'default'    => [
@@ -312,52 +342,79 @@ class ELPT_Portfolio_Widget extends Widget_Base {
                     )),
                 ),
                 'selectors'  => [
-                    '{{WRAPPER}} .elpt-portfolio-content .portfolio-item-wrapper:nth-child(' . $i . ') a' => 'height: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .elpt-portfolio-content .portfolio-item-wrapper:nth-child(' . $i . ') a'                           => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .elpt-portfolio-content.elpt-fixed-layout-mode .portfolio-item-wrapper.elpt-grid-pos-' . $i . ' a' => 'height: {{SIZE}}{{UNIT}};',
                 ],
             ] );
-            /*$this->add_control(
-            			'hr_'.$i,
-            			[
-            				'type' => \Elementor\Controls_Manager::DIVIDER,
-            				'conditions' => array(
-            					'relation' => 'and',
-            					'terms'    => array(
-            						array(
-            							'name'     => 'style',
-            							'operator' => '==',
-            							'value'   => 'grid_builder',
-            						),
-            						array(
-            							'name'     => 'postsperpage',
-            							'operator' => '>=',
-            							 'value'   => $i,
-            						)
-            					)
-            				),
-            			]
-            		);*/
+            //padding (all sides using Elementor's native dimensions control)
+            $item_padding = 'item_padding_' . $i;
+            $this->add_responsive_control( $item_padding, [
+                'label'       => __( 'Padding', 'portfolio-elementor' ),
+                'type'        => Controls_Manager::DIMENSIONS,
+                'size_units'  => ['px', '%'],
+                'conditions'  => array(
+                    'relation' => 'and',
+                    'terms'    => array(array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'grid_builder',
+                    ), array(
+                        'name'     => 'postsperpage',
+                        'operator' => '>=',
+                        'value'    => $i,
+                    )),
+                ),
+                'selectors'   => [
+                    '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-grid-builder .portfolio-item-wrapper:nth-child(' . $i . ')'                      => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-fixed-layout-mode .portfolio-item-wrapper.elpt-grid-pos-' . $i => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'description' => __( 'Add spacing inside the item wrapper. Use to create margins between the item borders and content.', 'portfolio-elementor' ),
+            ] );
+            $this->end_popover();
         }
         //================================== END OF GRID BUILDER==================
+        //Fixed Layout Mode - Maintain positions on filter
+        $this->add_control( 'grid_fixed_layout', [
+            'label'       => __( 'Fixed Layout', 'portfolio-elementor' ),
+            'type'        => Controls_Manager::SWITCHER,
+            'default'     => '',
+            'label_on'    => __( 'Yes', 'portfolio-elementor' ),
+            'label_off'   => __( 'No', 'portfolio-elementor' ),
+            'description' => __( 'When enabled, items maintain their positions when filtered, leaving empty spaces instead of reorganizing.', 'portfolio-elementor' ),
+            'condition'   => [
+                'style' => 'grid_builder',
+            ],
+            'separator'   => 'before',
+        ] );
         //Box Height
         $this->add_control( 'box_height', [
-            'label'      => __( 'Box Height (px)', 'powerfolio' ),
+            'label'      => __( 'Box Height (px)', 'portfolio-elementor' ),
             'type'       => Controls_Manager::SLIDER,
             'size_units' => ['px'],
             'conditions' => array(
                 'relation' => 'or',
-                'terms'    => array(array(
-                    'name'     => 'style',
-                    'operator' => '==',
-                    'value'    => 'box',
-                ), array(
-                    'name'     => 'style',
-                    'operator' => '==',
-                    'value'    => 'specialgrid5',
-                ), array(
-                    'name'     => 'style',
-                    'operator' => '==',
-                    'value'    => 'specialgrid6',
-                )),
+                'terms'    => array(
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'box',
+                    ),
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'specialgrid5',
+                    ),
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'specialgrid6',
+                    ),
+                    array(
+                        'name'     => 'style',
+                        'operator' => '==',
+                        'value'    => 'specialgrid7',
+                    )
+                ),
             ),
             'range'      => [
                 'px' => [
@@ -376,6 +433,8 @@ class ELPT_Portfolio_Widget extends Widget_Base {
                 '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-special-grid-5 .portfolio-item'         => 'height: {{SIZE}}{{UNIT}};',
                 '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item-wrapper' => 'height: {{SIZE}}{{UNIT}};',
                 '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item'         => 'height: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item'         => 'height: {{SIZE}}{{UNIT}};',
             ],
         ] );
         $this->add_control( 'Upgrade_note2', [
@@ -388,19 +447,19 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         //=========== END - Grid Settings	==============
         //=========== Hover Settings	==============
         $this->start_controls_section( 'section_hover', [
-            'label' => __( 'Hover Effect Settings', 'powerfolio' ),
+            'label' => __( 'Hover Effect Settings', 'portfolio-elementor' ),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
-        $description = __( 'Upgrade your plan to get access to 15+ hover effects! <a href="https://checkout.freemius.com/mode/dialog/plugin/7226/plan/12571/">CLICK TO UPGRADE</a>', 'powerfolio' );
+        $description = __( 'Upgrade your plan to get access to 15+ hover effects! <a href="https://checkout.freemius.com/mode/dialog/plugin/7226/plan/12571/">CLICK TO UPGRADE</a>', 'portfolio-elementor' );
         $this->add_control( 'hover', [
-            'label'   => __( 'Hover Style', 'powerfolio' ),
+            'label'   => __( 'Hover Style', 'portfolio-elementor' ),
             'type'    => Controls_Manager::SELECT,
             'default' => 'simple',
             'options' => \Powerfolio_Common_Settings::get_hover_options(),
         ] );
         // END - PRO Version Snippet
         $this->add_control( 'linkto', [
-            'label'   => __( 'Each project links to', 'powerfolio' ),
+            'label'   => __( 'Each project links to', 'portfolio-elementor' ),
             'type'    => Controls_Manager::SELECT,
             'default' => 'project',
             'options' => \Powerfolio_Common_Settings::get_lightbox_options( 'elementor' ),
@@ -415,18 +474,9 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         $this->end_controls_section();
         //=========== ADVANCED SECTION	==============
         $this->start_controls_section( 'section_advanced', [
-            'label' => __( 'Advanced', 'powerfolio' ),
+            'label' => __( 'Advanced', 'portfolio-elementor' ),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
-        // Custom JS - Restricted to administrators only
-        if ( current_user_can( 'manage_options' ) ) {
-            $this->add_control( 'custom_js', [
-                'label'    => __( 'Custom JS', 'powerfolio' ),
-                'type'     => \Elementor\Controls_Manager::CODE,
-                'language' => 'javascript',
-                'rows'     => 20,
-            ] );
-        }
         $this->add_control( 'upgrade_note4', [
             'label'           => '',
             'type'            => \Elementor\Controls_Manager::RAW_HTML,
@@ -437,20 +487,20 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         //=========== END - ADVANCED SECTION	==============
         //==========================================================================================
         $this->start_controls_section( 'section_item_description', [
-            'label' => __( 'Item', 'powerfolio' ),
+            'label' => __( 'Item', 'portfolio-elementor' ),
             'tab'   => Controls_Manager::TAB_STYLE,
         ] );
         //Hover: Background color
         $this->add_group_control( \Elementor\Group_Control_Background::get_type(), [
             'name'     => 'bgcolor',
-            'label'    => __( 'Hover: Background Color', 'powerfolio' ),
+            'label'    => __( 'Hover: Background Color', 'portfolio-elementor' ),
             'types'    => ['classic', 'gradient'],
             'selector' => '{{WRAPPER}} .portfolio-item-infos-wrapper',
         ] );
         // END - PRO Version Snippets
         //Border Size
         $this->add_control( 'border_size', [
-            'label'      => __( 'Item: Border Size', 'powerfolio' ),
+            'label'      => __( 'Item: Border Size', 'portfolio-elementor' ),
             'type'       => Controls_Manager::SLIDER,
             'size_units' => ['px'],
             'range'      => [
@@ -468,12 +518,12 @@ class ELPT_Portfolio_Widget extends Widget_Base {
             ],
         ] );
         $this->add_control( 'item_bordercolor', [
-            'label'     => __( 'Item: Border Color', 'powerfolio' ),
+            'label'     => __( 'Item: Border Color', 'portfolio-elementor' ),
             'type'      => Controls_Manager::COLOR,
             'default'   => '',
             'alpha'     => true,
             'selectors' => [
-                '{{WRAPPER}} .elpt-portfolio-content .portfolio-item' => 'border-color: {{VALUE}} !important;',
+                '{{WRAPPER}} .elpt-portfolio-content .portfolio-item' => 'border-color: {{VALUE}};',
             ],
         ] );
         $this->add_control( 'upgrade_note5', [
@@ -484,7 +534,7 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         ] );
         $this->end_controls_section();
         $this->start_controls_section( 'section_style', [
-            'label' => __( 'Filter', 'powerfolio' ),
+            'label' => __( 'Filter', 'portfolio-elementor' ),
             'tab'   => Controls_Manager::TAB_STYLE,
         ] );
         $this->add_control( 'Upgrade_note6', [
@@ -495,7 +545,7 @@ class ELPT_Portfolio_Widget extends Widget_Base {
         ] );
         $this->end_controls_section();
         $this->start_controls_section( 'section_pagination_styles', [
-            'label' => __( 'Pagination', 'powerfolio' ),
+            'label' => __( 'Pagination', 'portfolio-elementor' ),
             'tab'   => Controls_Manager::TAB_STYLE,
         ] );
         $this->add_control( 'Upgrade_note7', [
@@ -518,40 +568,30 @@ class ELPT_Portfolio_Widget extends Widget_Base {
      */
     protected function render() {
         $settings = $this->get_settings();
-        ?>		
-	
-		<?php 
         // Let's use this input to set posts per page for pagination
         echo '<input id="powerfolio_pagination_postsperpage" type="hidden" value="' . esc_attr( ( isset( $settings['pagination_postsperpage'] ) ? $settings['pagination_postsperpage'] : '' ) ) . '" />';
-        echo do_shortcode( '[powerfolio 
-				hover="' . esc_attr( ( isset( $settings['hover'] ) ? $settings['hover'] : '' ) ) . '" 
-				postsperpage="' . esc_attr( ( isset( $settings['postsperpage'] ) ? $settings['postsperpage'] : '' ) ) . '" 
-				showfilter="' . esc_attr( ( isset( $settings['showfilter'] ) ? $settings['showfilter'] : '' ) ) . '" 
-				showallbtn="' . esc_attr( ( isset( $settings['showallbtn'] ) ? $settings['showallbtn'] : '' ) ) . '" 
-				tax_text="' . esc_attr( ( isset( $settings['tax_text'] ) ? $settings['tax_text'] : '' ) ) . '" 
-				style="' . esc_attr( ( isset( $settings['style'] ) ? $settings['style'] : '' ) ) . '" 
-				margin="' . esc_attr( ( isset( $settings['margin'] ) ? $settings['margin'] : '' ) ) . '" 
-				columns="' . esc_attr( ( isset( $settings['columns'] ) ? $settings['columns'] : '' ) ) . '" 
-				linkto="' . esc_attr( ( isset( $settings['linkto'] ) ? $settings['linkto'] : '' ) ) . '"
-			]' );
-        ?>		
-
-		<?php 
-        wp_reset_postdata();
-        ?>	
-
-		<?php 
-        if ( !empty( $settings['custom_js'] ) ) {
-            ?>
-	<script><?php 
-            echo wp_kses( $settings['custom_js'], array() );
-            ?></script>
-	<?php 
+        // Normalize settings for Powerfolio_Portfolio class
+        // Map Elementor control names to expected keys
+        if ( isset( $settings['item_hide_title'] ) ) {
+            $settings['hide_item_title'] = $settings['item_hide_title'];
         }
-        ?>
-			
-
-		<?php 
+        if ( isset( $settings['item_hide_category'] ) ) {
+            $settings['hide_item_category'] = $settings['item_hide_category'];
+        }
+        // Handle taxonomy array for PRO version
+        if ( pe_fs()->can_use_premium_code__premium_only() && isset( $settings['taxonomy'] ) && is_array( $settings['taxonomy'] ) ) {
+            $settings['taxonomy'] = implode( ",", $settings['taxonomy'] );
+        }
+        // Pass settings directly to Powerfolio_Portfolio (same approach as Image Gallery widget)
+        // This allows complex data like item_icon array to be passed through
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template output is escaped within the method
+        echo \Powerfolio_Portfolio::get_portfolio_shortcode_output(
+            $settings,
+            null,
+            null,
+            'portfolio_elementor'
+        );
+        wp_reset_postdata();
     }
 
 }

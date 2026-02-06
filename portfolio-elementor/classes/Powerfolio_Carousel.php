@@ -38,9 +38,9 @@ class Powerfolio_Carousel {
 		), $atts));
 
 		//Enqueue Scripts
-		wp_enqueue_style( 'owl-carousel-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.carousel.css' );
-		wp_enqueue_style( 'owl-carousel-theme-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.theme.default.min.css' );
-		wp_enqueue_script( 'owl-carousel-js', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/owl.carousel.min.js', array('jquery'), '20151215', true );
+		wp_enqueue_style( 'owl-carousel-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.carousel.css', array(), '2.3.4' );
+		wp_enqueue_style( 'owl-carousel-theme-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.theme.default.min.css', array(), '2.3.4' );
+		wp_enqueue_script( 'owl-carousel-js', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/owl.carousel.min.js', array('jquery'), '2.3.4', true );
 
 		//portfolio module
 		wp_enqueue_script( 'elpug-carousel-portfolio-js', plugin_dir_url( __FILE__ ) . '../assets/js/custom-carousel-portfolio.js', array('jquery'), '20151215', true );
@@ -59,8 +59,8 @@ class Powerfolio_Carousel {
 			if ( $portfolio_type == 'yes') {
 				$args = array(
 					'post_type' => $post_type,
-					'posts_per_page' => 24,	
-					'tax_query' => array(
+					'posts_per_page' => 24,
+					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 						array(
 							'taxonomy' => 'elemenfoliocategory',
 							'field'    => 'id',
@@ -138,13 +138,21 @@ class Powerfolio_Carousel {
 			
 			else {
 				$output ='';
-				$output .= "nothing found.";
+				// No portfolio items found - display helpful message
+			$empty_message = apply_filters(
+				'powerfolio_carousel_empty_message',
+				__('No items found for the selected post type in this portfolio carousel widget.', 'portfolio-elementor')
+			);
+
+			$output = '<div class="elpt-portfolio-carousel-empty-message" style="padding: 20px; text-align: center; color: #666;">';
+			$output .= '<p>' . esc_html($empty_message) . '</p>';
+			$output .= '</div>';
 
 				
 			}
 
 			//Reset Query
-			wp_reset_query();
+			wp_reset_postdata();
 				
 		return $output;
 	}	

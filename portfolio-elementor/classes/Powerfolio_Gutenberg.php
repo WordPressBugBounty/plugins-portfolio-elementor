@@ -162,19 +162,21 @@ class Powerfolio_Gutenberg {
 
         // Enqueue general scripts for editor
         Powerfolio_Portfolio::enqueue_scripts();
-
         // Custom JS for Gutenberg editor screen
 		wp_enqueue_script( 'elpt-portfoliojs-gutenberg', plugin_dir_url( __DIR__ ).'assets/js/custom-portfolio-gutenberg.js', array('jquery'), '1', true );
     
 
         // Enqueue your block script
-        wp_enqueue_script(
-            'portfolio-block-js',
-            plugins_url( '../build/portfolio-block/index.js', __FILE__ ),
-            array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-            filemtime( plugin_dir_path( __FILE__ ) . '../build/portfolio-block/index.js' ),
-            true
-        );
+    wp_enqueue_script(
+        'portfolio-block-js',
+        plugins_url( '../build/portfolio-block/index.js', __FILE__ ),
+        array( 'wp-blocks', 'wp-element', 'wp-editor' ),
+        filemtime( plugin_dir_path( __FILE__ ) . '../build/portfolio-block/index.js' ),
+        true
+    );
+
+    // Set script translations for portfolio block
+    wp_set_script_translations( 'portfolio-block-js', 'portfolio-elementor', plugin_dir_path( __DIR__ ) . 'languages' );
     
         // Localize your block script
         $hover_options = Powerfolio_Common_Settings::get_hover_options();

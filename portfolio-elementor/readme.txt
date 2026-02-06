@@ -1,20 +1,18 @@
-=== Portfolio for Elementor & Image Gallery | PowerFolio ===
-Contributors: rexdot, wppug, dotrex , freemius
+=== PowerFolio - Portfolio & Image Gallery for Elementor ===
+Contributors: rexdot, wppug, dotrex, freemius
 Donate link: 
 Tags: portfolio, responsive portfolio, image gallery, gallery, elementor
 Requires at least: 4.0
-Tested up to: 6.8.1
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.2.1
+Stable tag: 3.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The best portfolio and gallery plugin for WP, Elementor and Gutenberg. Create portfolio and image galleries in seconds using any page builder!
+A powerful portfolio and gallery plugin for WP, Elementor and Gutenberg. Create portfolio and image galleries in seconds using any page builder!
 
 
-== The #1 Portfolio and Gallery plugin for Elementor ==
-
-★★★★★
+== A Powerful Portfolio and Gallery Plugin for Elementor ==
 
 WordPress has changed. Page builders have made it easier than ever to create websites.
 
@@ -41,10 +39,10 @@ Powerfolio is also compatible with Gutenberg, the block editor from WordPress. W
 Powerfolio has built-in filterable gallery option. By activating it, your users will be able to filter the items in the gallery according to the selected category.
 
 == CSS Animations and Transition Effects ==
-You can choose from several transition effects for your portfolio or image grid.  A simple way to delight your users.
+You can choose from several transition effects for your portfolio or image grid. A simple way to delight your users.
 
 == Custom Grids ==
-There are several grid options to choose, like the classic box grid, masonry and custom grids. 
+There are several grid options to choose from, like the classic box grid, masonry and custom grids.
 You can also create your own custom grid by changing the width and height of each item in the gallery (PRO version only)
 
 == Fully Responsive ==
@@ -66,11 +64,11 @@ This is a detailed tutorial on how to build a nice portfolio with the plugin
 * Filterable Image Gallery Addon/Widget for Elementor
 * Filterable Image Gallery Block for WordPress/Gutenberg
 * Portfolio Shortcode Generator (available on the WP Classic Editor screen)
-* Masonry,Boxed and custom Packery Grid layouts (and also a grid builder in PRO version!)
+* Masonry, Boxed and custom Packery Grid layouts (and also a grid builder in PRO version!)
 * You can show the projects on a modal or on a single page
 * Compatible with Elementor (Portfolio Widget)
 * Compatible with any page builder (using the shortcode option)
-* 2,3,4,5 or 6 collumns
+* 2,3,4,5 or 6 columns
 
 == Elementor Portfolio Widget/Addon ==
 With this Elementor portfolio widget, you can display the posts of the portfolio post type in a filterable gallery. You have options to customize everything, from the layout/grid to the hover effects. 
@@ -79,10 +77,10 @@ With this Elementor portfolio widget, you can display the posts of the portfolio
 You can use the Elementor gallery widget to display a filterable image gallery in your page. You will have the same customization options as the portfolio for elementor widget.
 
 == Image Gallery GRID Builder (PRO Version) ==
-With the grid builder, you wil be able to customize the width and height of each item in your gallery. In combination with the packery layout and the filter, it allows you to create unique and magic grids.
+With the grid builder, you will be able to customize the width and height of each item in your gallery. In combination with the packery layout and the filter, it allows you to create unique and magic grids.
 
 == Beta Features ==
-We also have some fatures that are not the main purpose of the plugin but we can turn into main features of the plugin. E.g.
+We also have some features that are not the main purpose of the plugin but we can turn into main features of the plugin. E.g.
 * Posts Grid Addon/Widget for Elementor
 * Woocommerce Products Grid Addon/Widget for Elementor
 * 4 Post/Product Grid Styles – Classic, Masonry and 2 creative styles
@@ -91,14 +89,14 @@ We also have some fatures that are not the main purpose of the plugin but we can
 
 With this Elementor widget, you can display the content of the “post” post type in a customizable post grid, with several style options.
 
- == PRODUCTS GRID FOR ELEMENTOR WIDGET ==
+== PRODUCTS GRID FOR ELEMENTOR WIDGET ==
 
 You can use this Elementor widget to display the products of your Woocommerce store.
 
 == PRO version Features ==
 * Several hover animations/effects
-* Several grid styles, including our exclusive Special Grids
-* Grid Builder (exclusive feature!)
+* Several grid styles, including Special Grids
+* Grid Builder
 * Portfolio Carousel Widget
 * Extra CSS effects and animations
 * Option to display a specific portfolio category
@@ -109,8 +107,8 @@ You can use this Elementor widget to display the products of your Woocommerce st
 1. Upload `elementor-portfolio` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Click on the "Portfolio" link from the main menu
-4. Click on "Add New Item", create your first portfolio content and publish. Create as many posts you want.
-5. Create a new page using Elementor, or edit a existing open
+4. Click on "Add New Item", create your first portfolio content and publish. Create as many posts as you want.
+5. Create a new page using Elementor, or edit an existing one
 6. Drag and drop the portfolio widget to your page.
 7. Customize it using the widget options and publish the page.
 8. Done! Your new portfolio is ready!
@@ -119,7 +117,7 @@ You can use this Elementor widget to display the products of your Woocommerce st
 
 The widget will be available in Elementor items. Just drag it to your website and select the customization options :)
 
-You can also use dthe shortcode to display the portfolio grid on a page/post, or using Gutenberg and other page builders:
+You can also use the shortcode to display the portfolio grid on a page/post, or using Gutenberg and other page builders:
 
 [powerfolio]
 
@@ -177,4 +175,8 @@ You can customize it using these options:
 3.1.2 - Update Freemius SDK / Fixed Undefined array key “pagination_postsperpage” PHP error
 3.1.4 - Fixed issues with latest WP update / Updated Freemius SDK
 3.2.0 - Added video lightbox support for YouTube and Vimeo / Improved security for Custom JS fields / Fixed lightbox conflicts / Restricted Custom JS field to administrators only
-3.2.1 - Added Hover Image feature for Image Gallery widget / Added optional hover image field with smooth transition effect / Security Hotfix
+3.2.1 - Added Hover Image feature for Image Gallery widget / Added optional hover image field with smooth transition effect / Security fix
+3.2.2 - Removed Custom JS Feature / Updated Freemius SDK
+3.2.3 - Security Hotfix
+3.2.4 - Added responsive controls for Grid Builder (PRO) / Added pixel support for border radius controls / Fixed Grid Builder mobile compatibility / Added Custom vs Automatic mobile layout modes / Improved CSS specificity and box-sizing for Grid Builder
+3.2.5 - Added new grid: Alternate Rows 1 (PRO) / Grid Builder Improvements (PRO)  / Added pagination for grid builder and custom grids (PRO) / Small code improvements

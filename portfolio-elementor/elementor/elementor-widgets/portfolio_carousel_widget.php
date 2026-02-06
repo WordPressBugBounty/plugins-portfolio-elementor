@@ -35,7 +35,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Elementor Portfolio Carousel', 'elpug' );
+		return __( 'Elementor Portfolio Carousel', 'portfolio-elementor' );
 	}
 
 	/**
@@ -98,7 +98,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Portfolio Carousel Settings', 'elpug' ),
+				'label' => __( 'Portfolio Carousel Settings', 'portfolio-elementor' ),
 			]
 		);
 
@@ -109,7 +109,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'post_type',
 			[
-				'label' => __( 'Post Type to display (default: elemenfolio)', 'powerfolio' ),
+				'label' => __( 'Post Type to display (default: elemenfolio)', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'elemenfolio',
 				'options' => $the_post_types,
@@ -120,24 +120,24 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'linkto',
 			[
-				'label' => __( 'Each project links to', 'powerfolio' ),
+				'label' => __( 'Each project links to', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'project',
 				'options' => [
-					'image' => __( 'Featured Image into Lightbox', 'powerfolio' ),
-					'project' => __( 'Project Details Page', 'powerfolio' ),				]
+					'image' => __( 'Featured Image into Lightbox', 'portfolio-elementor' ),
+					'project' => __( 'Project Details Page', 'portfolio-elementor' ),				]
 			]
 		);
 
 		$this->add_control(
 			'type',
 			[
-				'label' => __( 'Display specific portfolio category', 'powerfolio' ),
+				'label' => __( 'Display specific portfolio category', 'portfolio-elementor' ),
 				'description' => 'Only works with the "elemenfolio" post type.',
 				'type' => Controls_Manager::SWITCHER,
 				'default' => '',
-				'label_on' => __( 'On', 'powerfolio' ),
-				'label_off' => __( 'Off', 'powerfolio' ),
+				'label_on' => __( 'On', 'portfolio-elementor' ),
+				'label_off' => __( 'Off', 'portfolio-elementor' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -146,7 +146,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'taxonomy',
 			[
-				'label' => __( 'If yes, select wich portfolio category to show', 'powerfolio' ),
+				'label' => __( 'If yes, select wich portfolio category to show', 'portfolio-elementor' ),
 				'description' => 'Only works with the "elemenfolio" post type.',
 				'type' => Controls_Manager::SELECT,
 				'default' => 'yes',
@@ -157,25 +157,25 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'hover',
 			[
-				'label' => __( 'Hover Style', 'powerfolio' ),
+				'label' => __( 'Hover Style', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'simple',
 				'options' => [
-					'simple' => __( 'Simple', 'powerfolio' ),
-					'hover1' => __( 'From Bottom', 'powerfolio' ),	
-					'hover2' => __( 'From Top', 'powerfolio' ),	
-					'hover3' => __( 'From Right', 'powerfolio' ),	
-					'hover4' => __( 'From Left', 'powerfolio' ),	
-					'hover5' => __( 'Hover Effect 5', 'powerfolio' ),	
-					'hover6' => __( 'Special 1', 'powerfolio' ),	
-					'hover7' => __( 'Text from Left', 'powerfolio' ),		
-					'hover8' => __( 'Text from right', 'powerfolio' ),	
-					'hover9' => __( 'Text from Top', 'powerfolio' ),		
-					'hover10' => __( 'Text from Bottom', 'powerfolio' ),
-					'hover11' => __( 'Zoom Out', 'powerfolio' ),		
-					'hover12' => __( 'Card from Left', 'powerfolio' ),	
-					'hover13' => __( 'Card from Right', 'powerfolio' ),	
-					'hover14' => __( 'Card from Bottom', 'powerfolio' ),
+					'simple' => __( 'Simple', 'portfolio-elementor' ),
+					'hover1' => __( 'From Bottom', 'portfolio-elementor' ),	
+					'hover2' => __( 'From Top', 'portfolio-elementor' ),	
+					'hover3' => __( 'From Right', 'portfolio-elementor' ),	
+					'hover4' => __( 'From Left', 'portfolio-elementor' ),	
+					'hover5' => __( 'Hover Effect 5', 'portfolio-elementor' ),	
+					'hover6' => __( 'Special 1', 'portfolio-elementor' ),	
+					'hover7' => __( 'Text from Left', 'portfolio-elementor' ),		
+					'hover8' => __( 'Text from right', 'portfolio-elementor' ),	
+					'hover9' => __( 'Text from Top', 'portfolio-elementor' ),		
+					'hover10' => __( 'Text from Bottom', 'portfolio-elementor' ),
+					'hover11' => __( 'Zoom Out', 'portfolio-elementor' ),		
+					'hover12' => __( 'Card from Left', 'portfolio-elementor' ),	
+					'hover13' => __( 'Card from Right', 'portfolio-elementor' ),	
+					'hover14' => __( 'Card from Bottom', 'portfolio-elementor' ),
 				]
 			]
 		);		
@@ -187,7 +187,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'section_item_description',
 			[
-				'label' => __( 'Item', 'powerfolio' ),
+				'label' => __( 'Item', 'portfolio-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -198,7 +198,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 			\Elementor\Group_Control_Background::get_type(),
 			[
 				'name' => 'bgcolor',
-				'label' => __( 'Hover: Background Color', 'powerfolio' ),
+				'label' => __( 'Hover: Background Color', 'portfolio-elementor' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .portfolio-item-infos-wrapper',
 			]
@@ -210,14 +210,14 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'text_transform',
 			[
-				'label' => __( 'Item Description: Text Transform', 'powerfolio' ),
+				'label' => __( 'Item Description: Text Transform', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
-					'' => __( 'None', 'powerfolio' ),
-					'uppercase' => __( 'UPPERCASE', 'powerfolio' ),
-					'lowercase' => __( 'lowercase', 'powerfolio' ),
-					'capitalize' => __( 'Capitalize', 'powerfolio' ),
+					'' => __( 'None', 'portfolio-elementor' ),
+					'uppercase' => __( 'UPPERCASE', 'portfolio-elementor' ),
+					'lowercase' => __( 'lowercase', 'portfolio-elementor' ),
+					'capitalize' => __( 'Capitalize', 'portfolio-elementor' ),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .portfolio-item-infos-wrapper' => 'text-transform: {{VALUE}};',
@@ -229,13 +229,13 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'text_align',
 			[
-				'label' => __( 'Item Description: Text Align', 'powerfolio' ),
+				'label' => __( 'Item Description: Text Align', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
-					'center' => __( 'Center', 'powerfolio' ),
-					'left' => __( 'Left', 'powerfolio' ),
-					'right' => __( 'Right', 'powerfolio' ),
+					'center' => __( 'Center', 'portfolio-elementor' ),
+					'left' => __( 'Left', 'portfolio-elementor' ),
+					'right' => __( 'Right', 'portfolio-elementor' ),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .portfolio-item-infos-wrapper' => 'text-align: {{VALUE}};',
@@ -246,13 +246,13 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'vertical_align',
 			[
-				'label' => __( 'Item Description: Vertical Align', 'powerfolio' ),
+				'label' => __( 'Item Description: Vertical Align', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => '50%',
 				'options' => [
-					'60px' => __( 'Top', 'powerfolio' ),
-					'50%' => __( 'Center', 'powerfolio' ),
-					'70%' => __( 'Bottom', 'powerfolio' ),
+					'60px' => __( 'Top', 'portfolio-elementor' ),
+					'50%' => __( 'Center', 'portfolio-elementor' ),
+					'70%' => __( 'Bottom', 'portfolio-elementor' ),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .elpt-portfolio-content .portfolio-item-infos' => 'top: {{VALUE}};',
@@ -264,7 +264,7 @@ class ELPT_Portfolio_Carousel extends Widget_Base {
 		$this->add_control(
 			'border_radius',
 			[
-				'label' => __( 'Item: Border Radius', 'powerfolio' ),
+				'label' => __( 'Item: Border Radius', 'portfolio-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ '%' ],
 				'range' => [

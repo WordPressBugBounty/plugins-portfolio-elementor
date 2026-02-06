@@ -14,17 +14,37 @@ function startElemenfolio(){
         });  
         //Packery
         var $packery = jQuery('#elementor-preview-iframe').contents().find('.elpt-portfolio-content-packery').isotope({
-            layoutMode: 'packery',            
+            layoutMode: 'packery',
             itemSelector: '.portfolio-item-wrapper'
+        });
+
+        //fitRows (for Special Grid 7 - Alternate Rows 1)
+        var $fitrows = jQuery('#elementor-preview-iframe').contents().find('.elpt-portfolio-content-fitrows').isotope({
+            layoutMode: 'fitRows',
+            itemSelector: '.portfolio-item-wrapper'
+        });
+
+        $fitrows.imagesLoaded().progress( function() {
+            $fitrows.isotope('layout');
         });
 
         /*
         * Paginated Isotope
         */
-        var itemSelector = ".portfolio-item-wrapper"; 
+        var itemSelector = ".portfolio-item-wrapper";
 
-        var $container = jQuery('#elementor-preview-iframe').contents().find('.elpt-portfolio-content-isotope-pro').isotope({
-            layoutMode: 'masonry',
+        // Detect layout mode based on classes
+        var $containerElement = jQuery('#elementor-preview-iframe').contents().find('.elpt-portfolio-content-isotope-pro');
+        var layoutMode = 'masonry'; // default
+
+        if ($containerElement.hasClass('elpt-portfolio-content-fitrows')) {
+            layoutMode = 'fitRows';
+        } else if ($containerElement.hasClass('elpt-portfolio-content-packery')) {
+            layoutMode = 'packery';
+        }
+
+        var $container = $containerElement.isotope({
+            layoutMode: layoutMode,
             itemSelector: itemSelector
         });
 
@@ -136,7 +156,6 @@ jQuery(window).on('load', function(){
     });
 
     setInterval(function() {	
-        console.log(gridSettings.itemsPerPageDefault);
 		startElemenfolio(); 
 	}, 1000);
 });

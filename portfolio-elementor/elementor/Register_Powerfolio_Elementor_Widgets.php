@@ -46,13 +46,13 @@ class Register_Powerfolio_Elementor_Widgets {
 
 			//Image Lightbox
 			if ( apply_filters( 'elpt-enable-simple-lightbox', TRUE ) === TRUE ) {
-				wp_enqueue_script( 'simple-lightbox-js', plugin_dir_url( __FILE__ ) .  '../vendor/simplelightbox/dist/simple-lightbox.min.js', array('jquery'), '20151218', true );
-				wp_enqueue_style( 'simple-lightbox-css', plugin_dir_url( __FILE__ ) .  '../vendor/simplelightbox/dist/simplelightbox.min.css' );
-				wp_enqueue_script( 'elpt-portfoliojs-lightbox',  plugin_dir_url( __FILE__ ) . '../assets/js/custom-portfolio-lightbox.js', array('jquery'), '20151215', true );	
+				wp_enqueue_script( 'simple-lightbox-js', plugin_dir_url( __FILE__ ) .  '../vendor/simplelightbox/dist/simple-lightbox.min.js', array('jquery'), '2.14.2', true );
+				wp_enqueue_style( 'simple-lightbox-css', plugin_dir_url( __FILE__ ) .  '../vendor/simplelightbox/dist/simplelightbox.min.css', array(), '2.14.2' );
+				wp_enqueue_script( 'elpt-portfoliojs-lightbox',  plugin_dir_url( __FILE__ ) . '../assets/js/custom-portfolio-lightbox.js', array('jquery'), '3.2.2', true );	
 			}		
 
 			//Custom CSS
-			wp_enqueue_style( 'elpt-portfolio-css', plugin_dir_url( __FILE__ ) .  '../assets/css/powerfolio_css.css' );
+			wp_enqueue_style( 'elpt-portfolio-css', plugin_dir_url( __FILE__ ) .  '../assets/css/powerfolio_css.css', array(), '3.2.2' );
 							
 			//JS				
 			wp_enqueue_script( 'elpt-portfolio-js', plugin_dir_url( __FILE__ ) . '../assets/js/custom-portfolio.js', array('jquery','jquery-isotope','jquery-packery'), '20151215', true );		
@@ -60,14 +60,16 @@ class Register_Powerfolio_Elementor_Widgets {
 			// Carousel
 			if ( \Powerfolio_Carousel::is_carousel_enabled() ) {
 				wp_enqueue_script( 'imagesLoaded' );
-				wp_enqueue_style( 'owl-carousel-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.carousel.css' );
-				wp_enqueue_style( 'owl-carousel-theme-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.theme.default.min.css' );
-				wp_enqueue_script( 'owl-carousel-js', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/owl.carousel.min.js', array('jquery'), '20151215', true );
+				wp_enqueue_style( 'owl-carousel-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.carousel.css', array(), '2.3.4' );
+				wp_enqueue_style( 'owl-carousel-theme-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.theme.default.min.css', array(), '2.3.4' );
+				wp_enqueue_script( 'owl-carousel-js', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/owl.carousel.min.js', array('jquery'), '2.3.4', true );
 			}
 
 			// Post and Product grids
-			wp_enqueue_style( 'pwrgrids-css', plugin_dir_url( __FILE__ ) .  '../assets/css/pwrgrids_css.css' );
-			wp_enqueue_style( 'font-awesome-free', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' );
+			wp_enqueue_style( 'pwrgrids-css', plugin_dir_url( __FILE__ ) .  '../assets/css/pwrgrids_css.css', array(), '3.2.2' );
+			// Note: Font Awesome should be bundled with the plugin or loaded from a local source
+			// External CDN loading is discouraged by WordPress.org
+			// wp_enqueue_style( 'font-awesome-free', plugin_dir_url( __FILE__ ) . '../assets/css/font-awesome.min.css', array(), '5.5.0' );
 			wp_enqueue_script( 'pwgd-custom-js', plugin_dir_url( __FILE__ ) . '../assets/js/pwrgrids-custom-js.js', array('jquery','jquery-isotope','jquery-packery'), '20151215', true );				
 
 		} );
@@ -85,10 +87,10 @@ class Register_Powerfolio_Elementor_Widgets {
 			// Carousel
 			if ( \Powerfolio_Carousel::is_carousel_enabled() ) {
 				wp_enqueue_script( 'imagesLoaded' );
-				wp_enqueue_style( 'owl-carousel-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.carousel.css' );
-				wp_enqueue_style( 'owl-carousel-theme-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.theme.default.min.css' );
-				wp_enqueue_script( 'owl-carousel-js', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/owl.carousel.min.js', array('jquery'), '20151215', true );
-				wp_enqueue_script( 'elpug-carousel-elementor-js', plugin_dir_url( __FILE__ ) . '../assets/js/custom-carousel-portfolio-elementor.js', array('jquery'), '20151215', true );
+				wp_enqueue_style( 'owl-carousel-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.carousel.css', array(), '2.3.4' );
+				wp_enqueue_style( 'owl-carousel-theme-css', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/assets/owl.theme.default.min.css', array(), '2.3.4' );
+				wp_enqueue_script( 'owl-carousel-js', plugin_dir_url( __FILE__ ) . '../vendor/owl.carousel/owl.carousel.min.js', array('jquery'), '2.3.4', true );
+				wp_enqueue_script( 'elpug-carousel-elementor-js', plugin_dir_url( __FILE__ ) . '../assets/js/custom-carousel-portfolio-elementor.js', array('jquery'), '3.2.2', true );
 			}
 
 			// Post Grid

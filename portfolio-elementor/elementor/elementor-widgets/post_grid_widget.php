@@ -35,7 +35,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Post Grid (PwrGrids)', 'pwrgrids' );
+		return __( 'Post Grid (PwrGrids)', 'portfolio-elementor' );
 	}
 
 	/**
@@ -104,7 +104,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid',
 			[
-				'label' => __( 'General Settings', 'pwrgrids' ),
+				'label' => __( 'General Settings', 'portfolio-elementor' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);		
@@ -112,7 +112,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_post_grid',
 				[
-					'label' => __( 'Layout / Grid', 'pwrgrids' ),
+					'label' => __( 'Layout / Grid', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -122,15 +122,15 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'grid_style',
 				[
-					'label' => __( 'Grid Style', 'pwrgrids' ),
+					'label' => __( 'Grid Style', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SELECT,
 					'default' => 'grid-style-classic',
 					'options' => [
-						'grid-style-classic'  => __( 'Classic', 'pwrgrids' ),
-						'grid-style-masonry' => __( 'Masonry', 'pwrgrids' ),
-						'grid-style-style2' => __( 'Style 2', 'pwrgrids' ),
-						'grid-style-style3' => __( 'Style 3', 'pwrgrids' ),
-						'grid-style-style4' => __( 'Style 4', 'pwrgrids' ),
+						'grid-style-classic'  => __( 'Classic', 'portfolio-elementor' ),
+						'grid-style-masonry' => __( 'Masonry', 'portfolio-elementor' ),
+						'grid-style-style2' => __( 'Style 2', 'portfolio-elementor' ),
+						'grid-style-style3' => __( 'Style 3', 'portfolio-elementor' ),
+						'grid-style-style4' => __( 'Style 4', 'portfolio-elementor' ),
 						
 					],
 				]
@@ -140,7 +140,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'columns',
 				[
-					'label' => __( 'Number of columns', 'pwrgrids' ),
+					'label' => __( 'Number of columns', 'portfolio-elementor' ),
 					'type' => Controls_Manager::SELECT,
 					'default' => 'pwgd-3columns',	
 					/*'conditions' => [
@@ -154,11 +154,11 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 						]
 					],*/			
 					'options' => [
-						'pwgd-1columns' => __( '1', 'pwrgrids' ),
-						'pwgd-2columns' => __( '2', 'pwrgrids' ),
-						'pwgd-3columns' => __( '3', 'pwrgrids' ),
-						'pwgd-4columns' => __( '4', 'pwrgrids' ),
-						'pwgd-5columns' => __( '5', 'pwrgrids' ),
+						'pwgd-1columns' => __( '1', 'portfolio-elementor' ),
+						'pwgd-2columns' => __( '2', 'portfolio-elementor' ),
+						'pwgd-3columns' => __( '3', 'portfolio-elementor' ),
+						'pwgd-4columns' => __( '4', 'portfolio-elementor' ),
+						'pwgd-5columns' => __( '5', 'portfolio-elementor' ),
 					]
 				]
 			);
@@ -168,7 +168,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_post_item',
 				[
-					'label' => __( 'Post Item', 'pwrgrids' ),
+					'label' => __( 'Post Item', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -178,7 +178,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_item_margin',
 				[
-					'label' => __( 'Margin between posts', 'pwrgrids' ),
+					'label' => __( 'Margin between posts', 'portfolio-elementor' ),
 					'type' => Controls_Manager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -202,7 +202,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Border::get_type(),
 				[
 					'name' => 'post_item_border',
-					'label' => __( 'Post Item: Border', 'pwrgrids' ),
+					'label' => __( 'Post Item: Border', 'portfolio-elementor' ),
 					'selector' => '{{WRAPPER}} .pwgd-post-grid-item',
 				]
 			);
@@ -211,7 +211,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Background::get_type(),
 				[
 					'name' => 'post_item_background',
-					'label' => __( 'Post Item: Background', 'pwrgrids' ),
+					'label' => __( 'Post Item: Background', 'portfolio-elementor' ),
 					'types' => [ 'classic', 'gradient' ],
 					'selector' => '{{WRAPPER}} .pwgd-post-grid-item',
 				]
@@ -220,7 +220,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_item_padding',
 				[
-					'label' => __( 'Post Item: Padding', 'pwrgrids' ),
+					'label' => __( 'Post Item: Padding', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'selectors' => [
@@ -232,7 +232,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_item_padding_inside',
 				[
-					'label' => __( 'Post Item: Padding (content only)', 'pwrgrids' ),
+					'label' => __( 'Post Item: Padding (content only)', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'selectors' => [
@@ -244,7 +244,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_item_border_radius',
 				[
-					'label' => __( 'Post Item: Border Radius', 'pwrgrids' ),
+					'label' => __( 'Post Item: Border Radius', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'condition'   => [
@@ -260,7 +260,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_post_item_filter',
 				[
-					'label' => __( 'Posts Filter', 'pwrgrids' ),
+					'label' => __( 'Posts Filter', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -269,11 +269,11 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'showfilter',
 				[
-					'label' => __( 'Show Category Filter', 'pwrgrids' ),
+					'label' => __( 'Show Category Filter', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Yes', 'pwrgrids' ),
-					'label_off' => __( 'No', 'pwrgrids' ),
-					'description' => __('IMPORTANT: It will only filter the posts that are currently displayed on the screen/page.', 'pwrgrids'),
+					'label_on' => __( 'Yes', 'portfolio-elementor' ),
+					'label_off' => __( 'No', 'portfolio-elementor' ),
+					'description' => __('IMPORTANT: It will only filter the posts that are currently displayed on the screen/page.', 'portfolio-elementor'),
 					'return_value' => 'yes',
 					'default' => 'no',
 				]
@@ -283,7 +283,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'filter_bgcolor',
 				[
-					'label' => __( 'Filter: Background Color', 'pwrgrids' ),
+					'label' => __( 'Filter: Background Color', 'portfolio-elementor' ),
 					'type' => Controls_Manager::COLOR,
 					'default' => '',
 					'alpha' => true,				
@@ -304,7 +304,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_post_query',
 			[
-				'label' => __( 'Post Query', 'pwrgrids' ),
+				'label' => __( 'Post Query', 'portfolio-elementor' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);	
@@ -312,7 +312,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'posts_per_page',
 				[
-					'label' => __( 'Posts per page', 'pwrgrids' ),
+					'label' => __( 'Posts per page', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::NUMBER,
 					'min' => 1,
 					'max' => 40,
@@ -325,16 +325,16 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'query_order_by',
 				[
-					'label' => __( 'Order By', 'pwrgrids' ),
+					'label' => __( 'Order By', 'portfolio-elementor' ),
 					'type' => Controls_Manager::SELECT,
 					'default' => 'date',				
 					'options' => [
-						'date' => __( 'Published Date', 'pwrgrids' ),
-						'modified' => __( 'Modified Date', 'pwrgrids' ),
-						'title' => __( 'Post Title', 'pwrgrids' ),
-						'slug' => __( 'Post Slug', 'pwrgrids' ),
-						'title' => __( 'Post Title', 'pwrgrids' ),
-						'comment_count' => __( 'Comments', 'pwrgrids' ),
+						'date' => __( 'Published Date', 'portfolio-elementor' ),
+						'modified' => __( 'Modified Date', 'portfolio-elementor' ),
+						'title' => __( 'Post Title', 'portfolio-elementor' ),
+						'slug' => __( 'Post Slug', 'portfolio-elementor' ),
+						'title' => __( 'Post Title', 'portfolio-elementor' ),
+						'comment_count' => __( 'Comments', 'portfolio-elementor' ),
 					]
 				]
 			);
@@ -343,12 +343,12 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'query_order',
 				[
-					'label' => __( 'Order', 'pwrgrids' ),
+					'label' => __( 'Order', 'portfolio-elementor' ),
 					'type' => Controls_Manager::SELECT,
 					'default' => 'ASC',				
 					'options' => [
-						'ASC' => __( 'ASC', 'pwrgrids' ),
-						'DESC' => __( 'DESC', 'pwrgrids' ),
+						'ASC' => __( 'ASC', 'portfolio-elementor' ),
+						'DESC' => __( 'DESC', 'portfolio-elementor' ),
 					]
 				]
 			);
@@ -360,7 +360,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_post_title',
 			[
-				'label' => __( 'Post Title / Featured Image', 'pwrgrids' ),
+				'label' => __( 'Post Title / Featured Image', 'portfolio-elementor' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);	
@@ -369,7 +369,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_title',
 				[
-					'label' => __( 'Post Title', 'pwrgrids' ),
+					'label' => __( 'Post Title', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -378,7 +378,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_title_text_color',
 				[
-					'label' => __( 'Post Title: Text Color', 'pwrgrids' ),
+					'label' => __( 'Post Title: Text Color', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					/*'scheme' => [
 						'type' => \Elementor\Scheme_Color::get_type(),
@@ -394,7 +394,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Typography::get_type(),
 				[
 					'name' => 'post_title',
-					'label' => __( 'Title: Typography', 'pwrgrids' ),
+					'label' => __( 'Title: Typography', 'portfolio-elementor' ),
 					//'scheme' => TYPOGRAPHY_1,
 					'selector' => '{{WRAPPER}} .pwgd-post-grid-item .pwgd-post-grid-item-title',
 				]
@@ -404,7 +404,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_featured_img',
 				[
-					'label' => __( 'Featured Image', 'pwrgrids' ),
+					'label' => __( 'Featured Image', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -414,10 +414,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_featured_image',
 				[
-					'label' => __( 'Show Featured Image', 'pwrgrids' ),
+					'label' => __( 'Show Featured Image', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -427,7 +427,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_featured_img_bg',
 				[
-					'label' => __( 'Featured Image: Background', 'pwrgrids' ),
+					'label' => __( 'Featured Image: Background', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					//'separator' => 'after',
 				]
@@ -437,7 +437,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Background::get_type(),
 				[
 					'name' => 'featured_image_background',
-					'label' => __( 'Featured Image: Default Background', 'pwrgrids' ),
+					'label' => __( 'Featured Image: Default Background', 'portfolio-elementor' ),
 					'types' => [ 'classic', 'gradient' ],
 					'selector' => '{{WRAPPER}} .pwgd-post-grid-item .pwgd-post-grid-item-img-link',
 				]
@@ -450,7 +450,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_post_meta',
 			[
-				'label' => __( 'Post Meta', 'pwrgrids' ),
+				'label' => __( 'Post Meta', 'portfolio-elementor' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);	
@@ -459,7 +459,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Typography::get_type(),
 				[
 					'name' => 'post_meta_typography',
-					'label' => __( 'Post Meta: Typography', 'pwrgrids' ),
+					'label' => __( 'Post Meta: Typography', 'portfolio-elementor' ),
 					//'scheme' => TYPOGRAPHY_1,
 					'selector' => '{{WRAPPER}} .pwgd-post-grid-item .pwgd-post-grid-item-meta',
 				]
@@ -468,7 +468,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_meta_bg_color',
 				[
-					'label' => __( 'Post Meta: Background Color of the Item', 'pwrgrids' ),
+					'label' => __( 'Post Meta: Background Color of the Item', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					/*'scheme' => [
 						'type' => \Elementor\Scheme_Color::get_type(),
@@ -483,7 +483,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_meta_text_color',
 				[
-					'label' => __( 'Post Meta: Text Color of the Item', 'pwrgrids' ),
+					'label' => __( 'Post Meta: Text Color of the Item', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					/*'scheme' => [
 						'type' => \Elementor\Scheme_Color::get_type(),
@@ -498,10 +498,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_date',
 				[
-					'label' => __( 'Show Date', 'pwrgrids' ),
+					'label' => __( 'Show Date', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -510,10 +510,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_author',
 				[
-					'label' => __( 'Show Author', 'pwrgrids' ),
+					'label' => __( 'Show Author', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -522,10 +522,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_comments',
 				[
-					'label' => __( 'Show Comments', 'pwrgrids' ),
+					'label' => __( 'Show Comments', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -534,10 +534,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_categories',
 				[
-					'label' => __( 'Show Categories', 'pwrgrids' ),
+					'label' => __( 'Show Categories', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -550,7 +550,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_post_body',
 			[
-				'label' => __( 'Post Content / Button', 'pwrgrids' ),
+				'label' => __( 'Post Content / Button', 'portfolio-elementor' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);	
@@ -558,7 +558,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_post body',
 				[
-					'label' => __( 'Post Body', 'pwrgrids' ),
+					'label' => __( 'Post Body', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -568,7 +568,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Typography::get_type(),
 				[
 					'name' => 'post_content_typography',
-					'label' => __( 'Post Body: Typography', 'pwrgrids' ),
+					'label' => __( 'Post Body: Typography', 'portfolio-elementor' ),
 					//'scheme' => TYPOGRAPHY_1,
 					'selector' => '{{WRAPPER}} .pwgd-post-grid-item .pwgd-post-grid-item-text',
 				]
@@ -578,7 +578,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'section_see_more_btn',
 				[
-					'label' => __( '"See More" Button', 'pwrgrids' ),
+					'label' => __( '"See More" Button', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -587,10 +587,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_btn',
 				[
-					'label' => __( 'Show "See More" button', 'pwrgrids' ),
+					'label' => __( 'Show "See More" button', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -599,9 +599,9 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'see_more_btn_text',
 				[
-					'label' => __( 'Button: Text', 'pwrgrids' ),
+					'label' => __( 'Button: Text', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
-					'default' => __( 'See More', 'pwrgrids' ),	
+					'default' => __( 'See More', 'portfolio-elementor' ),	
 					'condition'   => [
 						'show_btn' => 'true',
 					],								
@@ -613,7 +613,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Typography::get_type(),
 				[
 					'name' => 'post_button_typography',
-					'label' => __( 'Button: Typography', 'pwrgrids' ),
+					'label' => __( 'Button: Typography', 'portfolio-elementor' ),
 					//'scheme' => TYPOGRAPHY_1,
 					'condition'   => [
 						'show_btn' => 'true',
@@ -625,7 +625,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_button_typography_color',
 				[
-					'label' => __( 'Button: Text Color', 'pwrgrids' ),
+					'label' => __( 'Button: Text Color', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					/*'scheme' => [
 						'type' => \Elementor\Scheme_Color::get_type(),
@@ -644,7 +644,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Background::get_type(),
 				[
 					'name' => 'post_button_background',
-					'label' => __( 'Button: Background', 'pwrgrids' ),
+					'label' => __( 'Button: Background', 'portfolio-elementor' ),
 					'types' => [ 'classic', 'gradient' ],
 					'condition'   => [
 						'show_btn' => 'true',
@@ -657,7 +657,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Border::get_type(),
 				[
 					'name' => 'post_button_border',
-					'label' => __( 'Button: Border', 'pwrgrids' ),
+					'label' => __( 'Button: Border', 'portfolio-elementor' ),
 					'condition'   => [
 						'show_btn' => 'true',
 					],
@@ -668,7 +668,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_button_padding',
 				[
-					'label' => __( 'Button: Padding', 'pwrgrids' ),
+					'label' => __( 'Button: Padding', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'condition'   => [
@@ -683,7 +683,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_button_border_Radius',
 				[
-					'label' => __( 'Button: Border Radius', 'pwrgrids' ),
+					'label' => __( 'Button: Border Radius', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'condition'   => [
@@ -702,7 +702,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_post_pagination',
 			[
-				'label' => __( 'Pagination', 'pwrgrids' ),
+				'label' => __( 'Pagination', 'portfolio-elementor' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);	
@@ -710,10 +710,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'show_pagination',
 				[
-					'label' => __( 'Show Pagination', 'pwrgrids' ),
+					'label' => __( 'Show Pagination', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Show', 'pwrgrids' ),
-					'label_off' => __( 'Hide', 'pwrgrids' ),
+					'label_on' => __( 'Show', 'portfolio-elementor' ),
+					'label_off' => __( 'Hide', 'portfolio-elementor' ),
 					'return_value' => 'true',
 					'default' => 'true',
 				]
@@ -723,7 +723,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Typography::get_type(),
 				[
 					'name' => 'post_pagination_typography',
-					'label' => __( 'Pagination: Typography', 'pwrgrids' ),
+					'label' => __( 'Pagination: Typography', 'portfolio-elementor' ),
 					//'scheme' => TYPOGRAPHY_1,
 					'condition'   => [
 						'show_pagination' => 'true',
@@ -735,7 +735,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_pagination_typography_color',
 				[
-					'label' => __( 'Pagination: Text Color', 'pwrgrids' ),
+					'label' => __( 'Pagination: Text Color', 'portfolio-elementor' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					/*'scheme' => [
 						'type' => \Elementor\Scheme_Color::get_type(),
@@ -754,7 +754,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Background::get_type(),
 				[
 					'name' => 'post_pagination_link_background',
-					'label' => __( 'Pagination: Link Background', 'pwrgrids' ),
+					'label' => __( 'Pagination: Link Background', 'portfolio-elementor' ),
 					'types' => [ 'classic', 'gradient' ],
 					'condition'   => [
 						'show_pagination' => 'true',
@@ -767,7 +767,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 				\Elementor\Group_Control_Border::get_type(),
 				[
 					'name' => 'post_pagination_link_border',
-					'label' => __( 'Pagination: Link Border', 'pwrgrids' ),
+					'label' => __( 'Pagination: Link Border', 'portfolio-elementor' ),
 					'condition'   => [
 						'show_pagination' => 'true',
 					],
@@ -778,7 +778,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_pagination_link_padding',
 				[
-					'label' => __( 'Pagination: Link Padding', 'pwrgrids' ),
+					'label' => __( 'Pagination: Link Padding', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'condition'   => [
@@ -793,7 +793,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 			$this->add_control(
 				'post_pagination_link_border_radius',
 				[
-					'label' => __( 'Pagination: Link Border Radius', 'pwrgrids' ),
+					'label' => __( 'Pagination: Link Border Radius', 'portfolio-elementor' ),
 					'type' => Controls_Manager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'condition'   => [
@@ -820,7 +820,7 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_item_description',
 			[
-				'label' => __( 'Item', 'pwrgrids' ),
+				'label' => __( 'Item', 'portfolio-elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);		
@@ -847,10 +847,10 @@ class PWGD_Post_Grid_Widget extends Widget_Base {
 		$settings = $this->get_settings();	
 		
 		$post_grid = new \Powerfolio_Post_Grid();
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template output is escaped within the method
 		echo( $post_grid->get_post_grid_template($settings) );
 
 		?>
-		<script><?php //echo esc_js($settings['custom_js']); ?></script>
 		<?php
 	}
 

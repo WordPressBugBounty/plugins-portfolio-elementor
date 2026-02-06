@@ -130,7 +130,7 @@ class Powerfolio_Product_Grid {
 								$return .= '<div class="pwgd-post-grid-item-img-wrapper">';
 									$return .= '<a href="'.get_the_permalink().'" class="pwgd-post-grid-item-img-link" style="'.$featured_img_link_css.'"/>'; 
 										if ( $product->is_on_sale() ) {
-											$return .= '<span class="pwgd-on-sale-badge">'.__('Sale!','pwrgrids').'</span>'; 
+											$return .= '<span class="pwgd-on-sale-badge">'.__('Sale!','portfolio-elementor').'</span>'; 
 										}
 										$return .= '<img src="'.$featured_image_url.'"/>'; 
 									$return .= '</a>'; 
@@ -189,11 +189,11 @@ class Powerfolio_Product_Grid {
 
 								//Add to Cart                                 
 								if( $product->is_type( 'simple' ) ){
-									$btn_text = __('Add to Cart', 'pwrgrids');
+									$btn_text = __('Add to Cart', 'portfolio-elementor');
 									$btn_link = do_shortcode('[add_to_cart_url id="'.get_the_ID().'"]');
 								}   
 								else {
-									$btn_text = __('Select Options', 'pwrgrids');
+									$btn_text = __('Select Options', 'portfolio-elementor');
 									$btn_link = get_the_permalink();
 								}                 
 														
@@ -218,8 +218,8 @@ class Powerfolio_Product_Grid {
 				if( $settings['show_pagination'] == true ) {
 					$return .= '<div class="pwgd-post-grid-pagination">';
 
-						$btn_text_previous = '<i class="fas fa-arrow-left"></i> '.__('Previous','pwrgrids');
-						$btn_text_next = __('Next ','pwrgrids').'<i class="fas fa-arrow-right"></i>';
+						$btn_text_previous = '<i class="fas fa-arrow-left"></i> '.__('Previous','portfolio-elementor');
+						$btn_text_next = __('Next ','portfolio-elementor').'<i class="fas fa-arrow-right"></i>';
 
 						if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 							$return .= '<a href="#">'.$btn_text_previous.'</a>';
@@ -235,6 +235,16 @@ class Powerfolio_Product_Grid {
 				}
 
 				wp_reset_postdata();
+			else :
+				// No products found - display helpful message
+				$empty_message = apply_filters(
+					'powerfolio_product_grid_empty_message',
+					__('No items found for the selected post type in this product grid widget.', 'portfolio-elementor')
+				);
+
+				$return .= '<div class="pwgd-product-grid-empty-message" style="padding: 20px; text-align: center; color: #666;">';
+				$return .= '<p>' . esc_html($empty_message) . '</p>';
+				$return .= '</div>';
 			endif;     
 		
 		$return .='</div>';	

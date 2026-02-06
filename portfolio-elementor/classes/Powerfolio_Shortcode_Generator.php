@@ -31,8 +31,9 @@ class Powerfolio_Shortcode_Generator {
         wp_enqueue_script( 'wp-color-picker' );
         wp_enqueue_style( 'wp-color-picker' );
 
-        // Enqueue Font Awesome
-        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+        // Note: Font Awesome should be bundled with the plugin or loaded from a local source
+        // External CDN loading is discouraged by WordPress.org
+        // wp_enqueue_style('font-awesome', plugin_dir_url( __FILE__ ) . '../assets/css/font-awesome.min.css', array(), '5.15.4');
 
         // Prepare hover_options and column_options
         $hover_options = Powerfolio_Common_Settings::get_hover_options();

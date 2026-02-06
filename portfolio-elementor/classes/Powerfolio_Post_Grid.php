@@ -16,14 +16,14 @@ class Powerfolio_Post_Grid {
 		$text = get_the_content();
 		
 		if(strlen($text)<$length+10) {
-			return strip_tags($text); //don't cut if too shortx'x'Z
+			return wp_strip_all_tags($text); //don't cut if too short
 		} 
 		
 		$break_pos = strpos($text, ' ', $length); //find next space after desired length
 
 		$visible = substr($text, 0, $break_pos);
 		
-		return strip_tags($visible). " […]";
+		return wp_strip_all_tags($visible). " […]";
 	} 
 
 	public static function get_post_grid_template($settings) {   
@@ -198,7 +198,7 @@ class Powerfolio_Post_Grid {
 
 									//See Post Btn
 									if( $settings['show_btn'] == true ) {
-										$btn_text = __('See More', 'pwrgrids');
+										$btn_text = __('See More', 'portfolio-elementor');
 										$btn_link = get_permalink();
 
 										$return .= '<div class="pwgd-post-grid-item-btn-wrapper">';
@@ -219,8 +219,8 @@ class Powerfolio_Post_Grid {
 					if( $settings['show_pagination'] == true ) {
 						$return .= '<div class="pwgd-post-grid-pagination">';
 
-							$btn_text_previous = '<i class="fas fa-arrow-left"></i> '.__('Previous','pwrgrids');
-							$btn_text_next = __('Next ','pwrgrids').'<i class="fas fa-arrow-right"></i>';
+							$btn_text_previous = '<i class="fas fa-arrow-left"></i> '.__('Previous','portfolio-elementor');
+							$btn_text_next = __('Next ','portfolio-elementor').'<i class="fas fa-arrow-right"></i>';
 
 							if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 								$return .= '<a href="#">'.$btn_text_previous.'</a>';
@@ -236,6 +236,16 @@ class Powerfolio_Post_Grid {
 					}
 
 					wp_reset_postdata();
+				else :
+					// No posts found - display helpful message
+					$empty_message = apply_filters(
+						'powerfolio_post_grid_empty_message',
+						__('No items found for the selected post type in this post grid widget.', 'portfolio-elementor')
+					);
+
+					$return .= '<div class="pwgd-post-grid-empty-message" style="padding: 20px; text-align: center; color: #666;">';
+					$return .= '<p>' . esc_html($empty_message) . '</p>';
+					$return .= '</div>';
 				endif;     
 			
 			$return .='</div>';	

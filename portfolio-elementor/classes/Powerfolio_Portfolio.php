@@ -26,27 +26,27 @@ class Powerfolio_Portfolio {
 		// Filters
 		$portfolio_cpt_slug_rewrite = apply_filters( 'elpt_portfolio_cpt_slug_rewrite', 'portfolio' ); 
 		$portfolio_cpt_has_archive = apply_filters( 'elpt_portfolio_cpt_has_archive', false ); 
-		$portfolio_cpt_name = apply_filters( 'elpt_portfolio_cpt_name', __( 'Portfolio', 'elemenfolio' ) ); 
+		$portfolio_cpt_name = apply_filters( 'elpt_portfolio_cpt_name', __( 'Portfolio', 'portfolio-elementor' ) ); 
 
 
 		// Portfolio Post Type
 		$args['post-type-portfolio'] = array(
 			'labels' => array(
 				'name' => $portfolio_cpt_name,
-				'singular_name' => __( 'Item', 'elemenfolio' ),
-				'add_new' => __( 'Add New Item', 'elemenfolio' ),
-				'add_new_item' => __( 'Add New Item', 'elemenfolio' ),
-				'edit_item' => __( 'Edit Item', 'elemenfolio' ),
-				'new_item' => __( 'New Item', 'elemenfolio' ),
-				'view_item' => __( 'View Item', 'elemenfolio' ),
-				'search_items' => __( 'Search Through portfolio', 'elemenfolio' ),
-				'not_found' => __( 'No items found', 'elemenfolio' ),
-				'not_found_in_trash' => __( 'No items found in Trash', 'elemenfolio' ),
-				'parent_item_colon' => __( 'Parent Item:', 'elemenfolio' ),
+				'singular_name' => __( 'Item', 'portfolio-elementor' ),
+				'add_new' => __( 'Add New Item', 'portfolio-elementor' ),
+				'add_new_item' => __( 'Add New Item', 'portfolio-elementor' ),
+				'edit_item' => __( 'Edit Item', 'portfolio-elementor' ),
+				'new_item' => __( 'New Item', 'portfolio-elementor' ),
+				'view_item' => __( 'View Item', 'portfolio-elementor' ),
+				'search_items' => __( 'Search Through portfolio', 'portfolio-elementor' ),
+				'not_found' => __( 'No items found', 'portfolio-elementor' ),
+				'not_found_in_trash' => __( 'No items found in Trash', 'portfolio-elementor' ),
+				'parent_item_colon' => __( 'Parent Item:', 'portfolio-elementor' ),
 				'menu_name' => $portfolio_cpt_name,				
 			),		  
 			'hierarchical' => false,
-	        'description' => __( 'Add a New Item', 'elemenfolio' ),
+	        'description' => __( 'Add a New Item', 'portfolio-elementor' ),
 	        'menu_icon' =>  'dashicons-images-alt',
 	        'public' => true,
 	        'publicly_queryable' => true,
@@ -73,17 +73,17 @@ class Powerfolio_Portfolio {
 
 		// Add new taxonomy, make it hierarchical (like categories)
 		$labels = array(
-			'name'              => _x( 'Portfolio Categories', 'taxonomy general name', 'elemenfolio' ),
-			'singular_name'     => _x( 'Portfolio Category', 'taxonomy singular name', 'elemenfolio' ),
-			'search_items'      => __( 'Search Portfolio Categories', 'elemenfolio' ),
-			'all_items'         => __( 'All Portfolio Categories', 'elemenfolio' ),
-			'parent_item'       => __( 'Parent Portfolio Category', 'elemenfolio' ),
-			'parent_item_colon' => __( 'Parent Portfolio Category:', 'elemenfolio' ),
-			'edit_item'         => __( 'Edit Portfolio Category', 'elemenfolio' ),
-			'update_item'       => __( 'Update Portfolio Category', 'elemenfolio' ),
-			'add_new_item'      => __( 'Add New Portfolio Category', 'elemenfolio' ),
-			'new_item_name'     => __( 'New Portfolio Category', 'elemenfolio' ),
-			'menu_name'         => __( 'Portfolio Categories', 'elemenfolio' ),
+			'name'              => _x( 'Portfolio Categories', 'taxonomy general name', 'portfolio-elementor' ),
+			'singular_name'     => _x( 'Portfolio Category', 'taxonomy singular name', 'portfolio-elementor' ),
+			'search_items'      => __( 'Search Portfolio Categories', 'portfolio-elementor' ),
+			'all_items'         => __( 'All Portfolio Categories', 'portfolio-elementor' ),
+			'parent_item'       => __( 'Parent Portfolio Category', 'portfolio-elementor' ),
+			'parent_item_colon' => __( 'Parent Portfolio Category:', 'portfolio-elementor' ),
+			'edit_item'         => __( 'Edit Portfolio Category', 'portfolio-elementor' ),
+			'update_item'       => __( 'Update Portfolio Category', 'portfolio-elementor' ),
+			'add_new_item'      => __( 'Add New Portfolio Category', 'portfolio-elementor' ),
+			'new_item_name'     => __( 'New Portfolio Category', 'portfolio-elementor' ),
+			'menu_name'         => __( 'Portfolio Categories', 'portfolio-elementor' ),
 		);
 	
 		$args = array(
@@ -140,16 +140,16 @@ class Powerfolio_Portfolio {
 
 		//Image Lightbox
 		if ( apply_filters( 'elpt-enable-simple-lightbox', true ) == true ) {
-			wp_enqueue_script( 'simple-lightbox-js',  $assets_dir.  'vendor/simplelightbox/dist/simple-lightbox.min.js', array('jquery'), '20151218', true );
-			wp_enqueue_style( 'simple-lightbox-css', $assets_dir .  'vendor/simplelightbox/dist/simplelightbox.min.css' );
-			wp_enqueue_script( 'elpt-portfoliojs-lightbox', $assets_dir . 'assets/js/custom-portfolio-lightbox.js', array('jquery'), '20151215', true );
+			wp_enqueue_script( 'simple-lightbox-js',  $assets_dir.  'vendor/simplelightbox/dist/simple-lightbox.min.js', array('jquery'), '2.14.2', true );
+			wp_enqueue_style( 'simple-lightbox-css', $assets_dir .  'vendor/simplelightbox/dist/simplelightbox.min.css', array(), '2.14.2' );
+			wp_enqueue_script( 'elpt-portfoliojs-lightbox', $assets_dir . 'assets/js/custom-portfolio-lightbox.js', array('jquery'), '3.2.2', true );
 		}
 		
 		//Custom JS
-		wp_enqueue_script( 'elpt-portfoliojs', $assets_dir . 'assets/js/custom-portfolio.js', array('jquery'), '20151215', true );
+		wp_enqueue_script( 'elpt-portfoliojs', $assets_dir . 'assets/js/custom-portfolio.js', array('jquery'), '3.2.2', true );
 
 		//Custom CSS
-		wp_enqueue_style( 'elpt-portfolio-css', $assets_dir .  'assets/css/powerfolio_css.css' );
+		wp_enqueue_style( 'elpt-portfolio-css', $assets_dir .  'assets/css/powerfolio_css.css', array(), '3.2.2' );
 	}
 
 	/*
@@ -170,18 +170,20 @@ class Powerfolio_Portfolio {
 					"type" => '',
 					"style" => '',
 					"columns" => '',
-					"columns_mobile" => '',			
+					"columns_mobile" => '',
 					"margin" => '',
 					"linkto" => '',
 					"hover" => '',
 					"zoom_effect" => '',
 					"post_type" => '',
 					"tax_text" => '',
-					"showallbtn" => '',		
+					"showallbtn" => '',
 					"hide_item_title" => '',
-					"hide_item_category" => '',	
-					"taxonomy" => '',			
+					"hide_item_category" => '',
+					"taxonomy" => '',
+					"grid_fixed_layout" => '',
 					'element_id' => '',
+					'item_icon' => array(),
 				), $settings));
 
 
@@ -214,23 +216,78 @@ class Powerfolio_Portfolio {
 					'showallbtn'         => esc_attr($showallbtn),
 					'hide_item_title'    => esc_attr($hide_item_title),
 					'hide_item_category' => esc_attr($hide_item_category),
+					'grid_fixed_layout'  => esc_attr($grid_fixed_layout),
 					'element_id' => esc_attr($element_id),
+					'item_icon'  => $item_icon,
 				);
 			
 				break;
 
 			case 'image_gallery':
-				
+
 				$settings = $settings;
 				$settings['taxonomy'] = '';
 				$settings['post_type'] = '';
 				$settings['type'] = '';
 				$settings['hide_item_category'] = '';
-				$settings['hide_item_title'] = '';				
+				$settings['hide_item_title'] = '';
 				$settings['postsperpage'] = 99;
 				$settings['linkto'] = 'image';
 				$settings['zoom_effect'] = '';
 				$settings['columns_mobile'] = '';
+
+			break;
+
+			case 'portfolio_elementor':
+				// Settings passed directly from Elementor widget (not via shortcode)
+				// This allows complex data like item_icon array to pass through
+
+				// Set defaults for missing keys
+				$defaults = array(
+					'postsperpage' => '',
+					'pagination' => '',
+					'pagination_postsperpage' => '',
+					'showfilter' => '',
+					'taxonomy' => '',
+					'type' => '',
+					'style' => '',
+					'columns' => '',
+					'columns_mobile' => '',
+					'margin' => '',
+					'linkto' => '',
+					'hover' => '',
+					'zoom_effect' => '',
+					'post_type' => 'elemenfolio',
+					'tax_text' => '',
+					'showallbtn' => '',
+					'hide_item_title' => '',
+					'hide_item_category' => '',
+					'grid_fixed_layout' => '',
+					'element_id' => '',
+					'item_icon' => array(),
+				);
+
+				// Merge with defaults
+				$settings = array_merge($defaults, $settings);
+
+				// Apply escaping to scalar string values for security
+				// Skip arrays like 'item_icon' and 'taxonomy' (when array)
+				$skip_escape = array('item_icon', 'taxonomy', 'type');
+				foreach ($settings as $key => $value) {
+					if (is_string($value) && !in_array($key, $skip_escape, true)) {
+						$settings[$key] = esc_attr($value);
+					}
+				}
+
+				// Set default post type if empty
+				if (empty($settings['post_type'])) {
+					$settings['post_type'] = 'elemenfolio';
+				}
+
+				// Convert 'type' value (use loose comparison for consistency with 'portfolio' case)
+				if ($settings['type'] == 'yes') {
+					$settings['type'] = true;
+				}
 
 			break;			
 		}		
@@ -259,12 +316,12 @@ class Powerfolio_Portfolio {
 				if ( $settings['type'] == true) {
 					$args = array(
 						'post_type' => $settings['post_type'],
-						'posts_per_page' => $settings['postsperpage'],		
-						'suppress_filters' => false,  
-						'tax_query' => array(
+						'posts_per_page' => $settings['postsperpage'],
+						'suppress_filters' => false,
+						'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 							array(
 								'taxonomy' => 'elemenfoliocategory',
-								'field'    => 'id',
+								'field'    => 'term_id',
 								'terms'    => $settings['taxonomy'],
 							),
 						),		
@@ -285,9 +342,39 @@ class Powerfolio_Portfolio {
 
 				$items = $settings['list'];
 
-			break;		
+			break;
+
+			case 'portfolio_elementor':
+				// Same logic as 'portfolio' case - for Elementor widget direct calls
+				if(! $settings['post_type'] || $settings['post_type'] == '') {
+					$settings['post_type'] = 'elemenfolio';
+				}
+
+				if ( $settings['type'] == true) {
+					$args = array(
+						'post_type' => $settings['post_type'],
+						'posts_per_page' => $settings['postsperpage'],
+						'suppress_filters' => false,
+						'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+							array(
+								'taxonomy' => 'elemenfoliocategory',
+								'field'    => 'term_id',
+								'terms'    => $settings['taxonomy'],
+							),
+						),
+					);
+				} else {
+					$args = array(
+						'post_type' => $settings['post_type'],
+						'posts_per_page' => $settings['postsperpage'],
+						'suppress_filters' => false,
+					);
+				}
+
+				$items = (array)get_posts($args);
+			break;
 		}
-		
+
 		return (array)$items;
 	}
 
@@ -308,7 +395,7 @@ class Powerfolio_Portfolio {
 			$tax_text_filter = apply_filters( 'elpt_tax_text_filter', '*' );
 			
 			if ($settings['tax_text'] =='') {
-				$settings['tax_text'] = __('All', 'elemenfolio');
+				$settings['tax_text'] = __('All', 'portfolio-elementor');
 			}
 			
 			if ($settings['showallbtn'] !== 'no') {
@@ -349,7 +436,7 @@ class Powerfolio_Portfolio {
 
 				break;
 
-				// Image Gallery Widget	
+				// Image Gallery Widget
 				case 'image_gallery':
 
 					//Get all Tags
@@ -359,24 +446,52 @@ class Powerfolio_Portfolio {
 						foreach ($tag_array as $tag) {
 							if ( ! in_array ($tag, $tag_list ) ){
 								$tag_list[] = $tag;
-							} 
-						}						
+							}
+						}
 					}
-					
+
 					//Sort tags in alphabetical order
 					sort($tag_list);
 
 					//Filter tag list
 					$tag_list = apply_filters( 'elpt_gallery_terms_list', $tag_list );
-					
+
 					//List Tags
 					foreach($tag_list as $item) {
 						$item_slug = elpt_get_text_slug($item);
 						$output .='<button class="portfolio-filter-item" style="background-color:' .';" data-filter=".elemenfoliocategory-'.esc_attr($item_slug).'">'.$item.'</button>';
 					}
-					
+
 				break;
-						
+
+				// Portfolio Elementor Widget (direct call, same as portfolio)
+				case 'portfolio_elementor':
+
+					if ( $settings['post_type'] === 'elemenfolio' || $settings['post_type'] === '' ) {
+						$terms = get_terms( array(
+							'taxonomy' => 'elemenfoliocategory',
+							'hide_empty' => false,
+						) );
+
+						$terms = apply_filters( 'elpt_tax_terms_list', $terms );
+
+						foreach ( $terms as $term ) {
+							$thisterm = $term->name;
+							$thistermslug = $term->slug;
+
+							if ($settings['type'] == true && is_array($settings['taxonomy']) && in_array($term->term_id, $settings['taxonomy']) && count($settings['taxonomy']) > 1 ) {
+								$output .='<button class="portfolio-filter-item" style="background-color:' .';" data-filter=".elemenfoliocategory-'.esc_attr($thistermslug).'">'.esc_html($thisterm).'</button>';
+							}
+							else if ($settings['type'] != true) {
+								$output .='<button class="portfolio-filter-item" style="background-color:' .';" data-filter=".elemenfoliocategory-'.esc_attr($thistermslug).'">'.esc_html($thisterm).'</button>';
+							}
+						}
+					} else {
+						return ;
+					}
+
+				break;
+
 			}
 
 			$output .='</div>';	
@@ -417,7 +532,14 @@ class Powerfolio_Portfolio {
 
 		if ( array_key_exists('columns_mobile', $settings) ) {
 
-			if ( $settings['columns_mobile'] == '2') {
+			// Skip class generation for 'custom' - let responsive controls handle it
+			if ( $settings['columns_mobile'] == 'custom') {
+				$portfoliocolumns_mobile = '';
+			}
+			else if ( $settings['columns_mobile'] == '1') {
+				$portfoliocolumns_mobile = 'elpt-portfolio-columns-mobile-1';
+			}
+			else if ( $settings['columns_mobile'] == '2') {
 				$portfoliocolumns_mobile = 'elpt-portfolio-columns-mobile-2';
 			}
 			else if ( $settings['columns_mobile'] == '3') {
@@ -475,15 +597,37 @@ class Powerfolio_Portfolio {
 		}	
 		else if ($settings['style'] == 'specialgrid6' ) {
 			$styles['portfoliostyle'] = 'elpt-portfolio-special-grid-6';
-		}	
+		}
+		else if ($settings['style'] == 'specialgrid7' ) {
+			$styles['portfoliostyle'] = 'elpt-portfolio-special-grid-7';
+			// Uses fitRows instead of packery to prevent item climbing
+			// Note: This grid has fixed height, so Additional Margin uses margin-bottom (see portfolio_widget.php)
+			// Check if pagination is active - preserve the -pro class for pagination JS
+			if ( isset($settings['pagination'] ) && $settings['pagination'] == 'true' ) {
+				$styles['portfolio_isotope'] = 'elpt-portfolio-content-fitrows elpt-portfolio-content-isotope-pro';
+			} else {
+				$styles['portfolio_isotope'] = 'elpt-portfolio-content-fitrows';
+			}
+		}
 		else if ($settings['style'] == 'purchasedgrid' ) {
 			$styles['portfoliostyle'] = apply_filters( 'powerfolio_custom_style_class_filter', 'elpt-portfolio-purchased-grid');
 			$styles['portfolio_isotope'] = apply_filters( 'powerfolio_custom_isotope_class_filter', 'elpt-portfolio-content-isotope');
 			$styles['portfoliocolumns'] = apply_filters( 'powerfolio_custom_cols_class_filter', 'elpt-portfolio-columns-3');
-		}	
+		}
 		else if ($settings['style'] == 'grid_builder' ) {
 			$styles['portfoliostyle'] = 'elpt-portfolio-grid-builder';
-			$styles['portfolio_isotope'] = 'elpt-portfolio-content-packery';
+
+			// Add Fixed Layout class if enabled
+			if (isset($settings['grid_fixed_layout']) && $settings['grid_fixed_layout'] == 'yes') {
+				$styles['portfoliostyle'] .= ' elpt-fixed-layout-mode';
+			}
+
+			// Check if pagination is active - preserve the -pro class for pagination JS
+			if ( isset($settings['pagination'] ) && $settings['pagination'] == 'true' ) {
+				$styles['portfolio_isotope'] = 'elpt-portfolio-content-packery elpt-portfolio-content-isotope-pro';
+			} else {
+				$styles['portfolio_isotope'] = 'elpt-portfolio-content-packery';
+			}
 		}					
 		else {
 			$styles['portfoliostyle'] = 'elpt-portfolio-style-box';
@@ -509,7 +653,7 @@ class Powerfolio_Portfolio {
 			$rel_id = $settings['element_id'];
 		}		
 		
-		if ( $widget == 'portfolio' ) {
+		if ( $widget == 'portfolio' || $widget == 'portfolio_elementor' ) {
 			$portfolio_link = get_the_permalink($post['ID']);
 		}
 
@@ -584,7 +728,7 @@ class Powerfolio_Portfolio {
 	public static function get_portfolio_terms($post, $widget) {
         $term_names = [];
 
-        if ($widget == 'portfolio') {
+        if ($widget == 'portfolio' || $widget == 'portfolio_elementor') {
             $terms = get_the_terms($post['ID'], 'elemenfoliocategory');
             if (is_array($terms) || is_object($terms)) {
                 foreach ($terms as $term) {
@@ -637,7 +781,7 @@ class Powerfolio_Portfolio {
 			case 'image_gallery':
 				if ( array_key_exists('list_description', $post) ) {
 					$data['list_description'] = $post['list_description'];
-				}			
+				}
 
 				$data['post_title'] = $post['list_title'];
 
@@ -649,6 +793,11 @@ class Powerfolio_Portfolio {
 					$data['hover_image'] = $post['list_hover_image']['url'];
 				}
 
+				// Process item icon (per item for image gallery)
+				if ( array_key_exists('list_icon', $post) && !empty($post['list_icon']['value']) ) {
+					$data['item_icon'] = $post['list_icon'];
+				}
+
 				$tag_array = explode(",", $post['list_filter_tag']);
 
 				$data['classes'] = '';
@@ -656,8 +805,41 @@ class Powerfolio_Portfolio {
 				foreach ($tag_array as $tag) {
 					$data['classes'] .= ' elemenfoliocategory-' . elpt_get_text_slug($tag);
 				}
-			
+
 			break;
+
+			case 'portfolio_elementor':
+				// Same as 'portfolio' case - for Elementor widget direct calls
+				$data['post_id'] = $post['ID'];
+				$data['post_title'] = get_the_title($data['post_id'] );
+				$data['portfolio_image'] = Powerfolio_Common_Settings::get_image_url( get_post_thumbnail_id($data['post_id'] ) );
+
+				if (is_array($data['portfolio_image'])) {
+					$data['portfolio_image'] = $data['portfolio_image'][0];
+				}
+
+				$data['classes'] = get_post_class($data['post_id']);
+
+				if ( $settings['post_type'] == 'elemenfolio' ) {
+					$terms = get_the_terms($data['post_id'], 'elemenfoliocategory');
+					if ( is_array( $terms ) ) {
+						foreach ($terms as $term) {
+							if (!in_array('elemenfoliocategory-' . $term->slug, $data['classes'])) {
+								$data['classes'][] = 'elemenfoliocategory-' . $term->slug;
+							}
+						}
+					}
+				}
+
+				$data['classes'] = join(' ', $data['classes']);
+
+			break;
+		}
+
+		// Process global item icon from settings (for portfolio widget)
+		// This is set globally and applies to all items
+		if ( !isset($data['item_icon']) && isset($settings['item_icon']) && !empty($settings['item_icon']['value']) ) {
+			$data['item_icon'] = $settings['item_icon'];
 		}
 
 		// Terms
@@ -709,59 +891,148 @@ class Powerfolio_Portfolio {
 		// Get data for single item
 		$data = self::get_single_item_data($post, $settings, $widget);
 
+		// Check if this hover style uses the "content-below" layout
+		$hover_style = isset($settings['hover']) ? $settings['hover'] : '';
+		$is_content_below = Powerfolio_Common_Settings::is_content_below_style($hover_style);
+
 		$output = '';
-	
-		$output .= '<div class="portfolio-item-wrapper ' . $data['classes'] . '">';
-			
+
+		// Add layout class to wrapper for content-below styles
+		$wrapper_class = $is_content_below ? ' elpt-layout-content-below' : '';
+		$output .= '<div class="portfolio-item-wrapper ' . $data['classes'] . $wrapper_class . '">';
+
 			// Check if additional data attributes for video exist
 			$video_data_attr = '';
 			if (isset($data['link_data']['portfolio_link_data_video'])) {
 				$video_data_attr = ' ' . $data['link_data']['portfolio_link_data_video'] . ' ';
 			}
-			
+
 			// Sanitize title for lightbox to prevent XSS (SimpleLightbox vulnerability fix)
 			$safe_title = wp_strip_all_tags($data['post_title']);
 			$safe_title = esc_attr($safe_title);
-			
+
 			// Add hover class if hover image exists
 			$hover_class = !empty($data['hover_image']) ? ' elpt-has-hover-image' : '';
-			
+
 			$output .= '<a href="' . esc_url($data['link_data']['link']) . '" class="portfolio-item ' . esc_attr($data['link_data']['class']) . $hover_class . '" ' . esc_attr($data['link_data']['rel']) . ' style="background-image: url(' . esc_url($data['portfolio_image']) . ')" title="' . $safe_title . '" ' . $data['link_data']['target'] . ' ' . $data['link_data']['follow'] . $video_data_attr . '">';
-		
+
 				$output .= '<img src="' . esc_url($data['portfolio_image']) . '" class="elpt-main-image" title="' . $safe_title . '" alt="' . $safe_title . '"/>';
-				
+
 				// Add hover image if exists (backward compatible)
 				if (!empty($data['hover_image'])) {
 					$output .= '<img src="' . esc_url($data['hover_image']) . '" class="elpt-hover-image" title="' . $safe_title . '" alt="' . $safe_title . '" style="display: none;"/>';
 				}
-				$output .= '<div class="portfolio-item-infos-wrapper" style="background-color:' . ';"><div class="portfolio-item-infos">';
-			
-					// Title
-					if ($settings['hide_item_title'] != 'yes') {
-						$output .= '<div class="portfolio-item-title"><span class="portfolio-item-title-span">' . $data['post_title'] . '</span></div>';
-					}
-				
-					// Description
-					if (array_key_exists('list_description', $data) && $data['list_description'] != '') {
-						$output .= '<div class="portfolio-item-desc">' . $data['list_description'] . '</div>';
-					}
-				
-					// Categories / Tags
-					if ($settings['hide_item_category'] != 'yes') {
-						$output .= '<div class="portfolio-item-category">';
 
-						foreach ($data['term_names'] as $term_name) {
-							$output .= '<span class="elpt-portfolio-cat">' . esc_html($term_name) . '</span>';
-						}
+				// For standard layouts: info wrapper is INSIDE the link (overlay effect)
+				if ( ! $is_content_below ) {
+					$output .= self::get_item_info_html($data, $settings);
+				}
 
-						$output .= '</div>';
-					}
-			
-				$output .= '</div></div>';
 			$output .= '</a>';
+
+			// For content-below layouts: info wrapper is OUTSIDE the link (below image)
+			if ( $is_content_below ) {
+				$output .= self::get_item_info_html($data, $settings);
+			}
+
 		$output .= '</div>';
-	
+
 		return $output;
+	}
+
+	/**
+	 * Get the HTML for item info (title, description, categories).
+	 * Extracted to avoid code duplication between standard and content-below layouts.
+	 *
+	 * @param array $data Item data
+	 * @param array $settings Widget settings
+	 * @return string HTML output
+	 */
+	private static function get_item_info_html($data, $settings) {
+		$output = '';
+
+		// Check if this is a content-below style (for different icon positioning)
+		$hover_style = isset($settings['hover']) ? $settings['hover'] : '';
+		$is_content_below = Powerfolio_Common_Settings::is_content_below_style($hover_style);
+
+		// Render icon HTML if exists
+		$icon_html = '';
+		if ( isset($data['item_icon']) && !empty($data['item_icon']['value']) ) {
+			$icon_html = self::render_item_icon($data['item_icon']);
+		}
+
+		// Add modifier class when icon is present for CSS targeting
+		$infos_class = !empty($icon_html) ? 'portfolio-item-infos has-icon' : 'portfolio-item-infos';
+		$output .= '<div class="portfolio-item-infos-wrapper" style="background-color:' . ';"><div class="' . $infos_class . '">';
+
+			// For content-below layouts: icon and text content are siblings for flexbox layout
+			if ( $is_content_below && !empty($icon_html) ) {
+				// Icon wrapper
+				$output .= '<div class="portfolio-item-icon-wrapper">' . $icon_html . '</div>';
+
+				// Text content wrapper
+				$output .= '<div class="portfolio-item-text-content">';
+			} else {
+				// For standard layouts: icon above title
+				if ( !empty($icon_html) ) {
+					$output .= '<div class="portfolio-item-icon-wrapper">' . $icon_html . '</div>';
+				}
+			}
+
+			// Title
+			if ($settings['hide_item_title'] != 'yes') {
+				$output .= '<div class="portfolio-item-title"><span class="portfolio-item-title-span">' . $data['post_title'] . '</span></div>';
+			}
+
+			// Description
+			if (array_key_exists('list_description', $data) && $data['list_description'] != '') {
+				$output .= '<div class="portfolio-item-desc">' . $data['list_description'] . '</div>';
+			}
+
+			// Categories / Tags
+			if ($settings['hide_item_category'] != 'yes') {
+				$output .= '<div class="portfolio-item-category">';
+
+				foreach ($data['term_names'] as $term_name) {
+					$output .= '<span class="elpt-portfolio-cat">' . esc_html($term_name) . '</span>';
+				}
+
+				$output .= '</div>';
+			}
+
+			// Close text content wrapper for content-below layouts
+			if ( $is_content_below && !empty($icon_html) ) {
+				$output .= '</div>'; // Close .portfolio-item-text-content
+			}
+
+		$output .= '</div></div>';
+
+		return $output;
+	}
+
+	/**
+	 * Render an Elementor icon control value.
+	 *
+	 * @param array $icon The icon control value array with 'value' and 'library' keys
+	 * @return string HTML output of the icon
+	 */
+	private static function render_item_icon($icon) {
+		if ( empty($icon) || empty($icon['value']) ) {
+			return '';
+		}
+
+		// Check if Elementor Icons_Manager is available
+		if ( ! class_exists('\Elementor\Icons_Manager') ) {
+			return '';
+		}
+
+		// Use output buffering to capture the icon HTML
+		ob_start();
+		\Elementor\Icons_Manager::render_icon(
+			$icon,
+			[ 'aria-hidden' => 'true', 'class' => 'powerfolio-item-icon' ]
+		);
+		return ob_get_clean();
 	}	
 
 
@@ -801,23 +1072,35 @@ class Powerfolio_Portfolio {
 	
 		if (count($portfolio_items)) {
 			$output = '';
-	
+
 			$output .= '<div class="elpt-portfolio '.$settings['element_id'].'">';
-	
+
 				//Filter
 				$output .= self::get_grid_filter($settings, $widget);
-		
+
 				$output .= '<div class="elpt-portfolio-content ' . $settings['portfolio_isotope'] . ' ' . $settings['portfoliostyle'] . ' ' . $settings['zoom_effect'] . ' ' . $settings['hover'] . ' ' . $settings['portfoliocolumns'] . ' ' . $settings['portfoliocolumns_mobile'] . ' ' . $settings['portfoliomargin'] . '">';
-		
+
 				foreach ($portfolio_items as $post) {
 					$output .= self::get_single_item_output((array)$post, $settings, $widget);
 				}
-		
+
 				$output .= '</div>';
-	
+
 			$output .= '</div>';
-	
-			return wp_kses_post($output);			
+
+			return wp_kses_post($output);
+		} else {
+			// No portfolio items found - display helpful message
+			$empty_message = apply_filters(
+				'powerfolio_empty_message',
+				__('No items found for the selected post type in this portfolio widget.', 'portfolio-elementor')
+			);
+
+			$output = '<div class="elpt-portfolio-empty-message" style="padding: 20px; text-align: center; color: #666;">';
+			$output .= '<p>' . esc_html($empty_message) . '</p>';
+			$output .= '</div>';
+
+			return wp_kses_post($output);
 		}
 	}
 

@@ -56,7 +56,8 @@ if (!class_exists('Powerfolio_Feedback_Notice')) {
             clear:both;
         }";
 
-        _e("<style>".$elpt_review_css."</style>");
+        // Output inline CSS - CSS is safe as it's hardcoded above
+        echo '<style>' . $elpt_review_css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
         add_action( 'admin_print_footer_scripts', function () { 
             ?>
@@ -103,7 +104,7 @@ if (!class_exists('Powerfolio_Feedback_Notice')) {
         }
 
         // grab plugin installation date and compare it with current date
-        $display_date = date( 'Y-m-d h:i:s' );
+        $display_date = gmdate( 'Y-m-d H:i:s' );
         $install_date= new DateTime( $installation_date );
         $current_date = new DateTime( $display_date );
         $difference = $install_date->diff($current_date);
@@ -124,9 +125,9 @@ if (!class_exists('Powerfolio_Feedback_Notice')) {
         $img_path= $elpt_URL.'img/logo.png';
         $p_name="PowerFolio: Portfolio & Image Gallery for Elementor";
         $like_it_text='Rate Now! ★★★★★';
-        $already_rated_text=esc_html__( 'I already rated it', 'elemenfolio' );
-        $not_interested=esc_html__( 'Not Interested', 'elemenfolio' );
-        $not_like_it_text=esc_html__( 'No, not good enough, i do not like to rate it!', 'elemenfolio' );
+        $already_rated_text=esc_html__( 'I already rated it', 'portfolio-elementor' );
+        $not_interested=esc_html__( 'Not Interested', 'portfolio-elementor' );
+        $not_like_it_text=esc_html__( 'No, not good enough, i do not like to rate it!', 'portfolio-elementor' );
         $p_link=esc_url('https://wordpress.org/support/plugin/portfolio-elementor/reviews/#new-post');
         $pro_url=esc_url('https://wordpress.org/support/plugin/portfolio-elementor/reviews/#new-post');
        

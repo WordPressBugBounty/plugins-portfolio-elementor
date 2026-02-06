@@ -75,6 +75,7 @@
   }
 }
 .elpt-portfolio-content .portfolio-item-wrapper img {
+  display: block;
   width: 100%;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -121,6 +122,11 @@
   }
 }
 @media (max-width: 992px) {
+  .elpt-portfolio-content.elpt-portfolio-columns-mobile-1 .portfolio-item-wrapper {
+    width: 100%;
+  }
+}
+@media (max-width: 992px) {
   .elpt-portfolio-content.elpt-portfolio-columns-mobile-2 .portfolio-item-wrapper {
     width: 50%;
   }
@@ -130,6 +136,48 @@
     width: 33.33%;
   }
 }
+
+/* Grid Builder Mobile Override - Forces specific column layouts */
+@media (max-width: 992px) {
+  /* Force 1 column mobile layout - overrides Grid Builder responsive controls */
+  .elementor-widget-elpug .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-columns-mobile-1 .portfolio-item-wrapper:nth-child(n) {
+    width: 100% !important;
+  }
+  
+  /* Force 2 columns mobile layout - overrides Grid Builder responsive controls */
+  .elementor-widget-elpug .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-columns-mobile-2 .portfolio-item-wrapper:nth-child(n) {
+    width: 50% !important;
+  }
+  
+  /* Force 3 columns mobile layout - overrides Grid Builder responsive controls */
+  .elementor-widget-elpug .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-columns-mobile-3 .portfolio-item-wrapper:nth-child(n) {
+    width: 33.33% !important;
+  }
+}
+
+/* Grid Builder Mobile Override for Image Gallery Widget - Forces specific column layouts */
+@media (max-width: 992px) {
+  /* Force 1 column mobile layout - overrides Grid Builder responsive controls */
+  .elementor-widget-powerfolio_gallery .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-columns-mobile-1 .portfolio-item-wrapper:nth-child(n) {
+    width: 100% !important;
+  }
+  
+  /* Force 2 columns mobile layout - overrides Grid Builder responsive controls */
+  .elementor-widget-powerfolio_gallery .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-columns-mobile-2 .portfolio-item-wrapper:nth-child(n) {
+    width: 50% !important;
+  }
+  
+  /* Force 3 columns mobile layout - overrides Grid Builder responsive controls */
+  .elementor-widget-powerfolio_gallery .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-columns-mobile-3 .portfolio-item-wrapper:nth-child(n) {
+    width: 33.33% !important;
+  }
+}
+
+/* Grid Builder Box-sizing Fix */
+.elpt-portfolio-content.elpt-portfolio-grid-builder .portfolio-item-wrapper {
+  box-sizing: border-box !important;
+}
+
 .elpt-portfolio-content.elpt-portfolio-margin .portfolio-item-wrapper {
   padding: 0;
   padding-left: 5px;
@@ -199,7 +247,9 @@
   text-align: center;
 }
 .elpt-portfolio .isotope-pager a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 6px;
   margin-right: 3px;
   background: #333;
@@ -207,6 +257,8 @@
   font-size: 12px;
   border-radius: 3px;
   line-height: 1;
+  aspect-ratio: 1 / 1;
+  min-width: 30px;
 }
 .elpt-portfolio .isotope-pager a:focus,
 .elpt-portfolio .isotope-pager a:hover,
@@ -1464,6 +1516,194 @@
   -o-transform: scale(0.7);
   transform: scale(0.7);
 }
+/* ==========================================================================
+   STYLE 22: Content Visible Below
+   Uses "content-below" layout structure where info wrapper is OUTSIDE the link.
+   This allows the description to appear below the image without overlay.
+   ========================================================================== */
+
+/* Wrapper uses flexbox to stack image and info vertically */
+.elpt-portfolio-content.hover22 .portfolio-item-wrapper.elpt-layout-content-below {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Link/image container */
+.elpt-portfolio-content.hover22 .portfolio-item {
+  display: block;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Image - hidden (using background-image on the link instead) */
+.elpt-portfolio-content.hover22 .portfolio-item img.elpt-main-image {
+  display: none;
+}
+
+/* Info wrapper - positioned below image (not absolute) */
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  width: 100%;
+  height: auto;
+  min-height: 60px;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  z-index: 9;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+}
+
+/* Info content */
+.elpt-portfolio-content.hover22 .portfolio-item-infos {
+  opacity: 1;
+  position: relative;
+  top: 0 !important;
+  margin-top: 0 !important;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  padding: 15px 0;
+}
+
+/* Title */
+.elpt-portfolio-content.hover22 .portfolio-item-infos .portfolio-item-title {
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Description - now visible */
+.elpt-portfolio-content.hover22 .portfolio-item-infos .portfolio-item-desc {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Category */
+.elpt-portfolio-content.hover22 .portfolio-item-infos .portfolio-item-category {
+  display: block;
+}
+
+/* Hover effect - subtle shadow on image */
+.elpt-portfolio-content.hover22 .portfolio-item-wrapper:hover .portfolio-item {
+  -webkit-box-shadow: 0px 4px 14px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 4px 14px -1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 4px 14px -1px rgba(0, 0, 0, 0.24);
+}
+
+/* Hide default paragraph if any */
+.elpt-portfolio-content.hover22 p {
+  display: none;
+}
+
+/* ==========================================================================
+   ITEM ICON STYLES
+   Icon displayed on portfolio/gallery items
+   ========================================================================== */
+
+/* Icon wrapper - standard layouts (icon above title) */
+.elpt-portfolio-content .portfolio-item-icon-wrapper {
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+/* Icon element - inherits text color by default */
+.elpt-portfolio-content .powerfolio-item-icon {
+  font-size: 24px;
+  color: inherit;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* SVG icons */
+.elpt-portfolio-content .powerfolio-item-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   STYLE 22: Icon positioning (side by side with text)
+   Only applies when .has-icon class is present (icon is set)
+   ========================================================================== */
+
+/* Flexbox layout for icon + text content - ONLY when icon is present */
+.elpt-portfolio-content.hover22 .portfolio-item-infos.has-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+/* Text content takes remaining space */
+.elpt-portfolio-content.hover22 .portfolio-item-text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Icon wrapper in hover22 */
+.elpt-portfolio-content.hover22 .portfolio-item-icon-wrapper {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+/* Default: text left = icon right */
+.elpt-portfolio-content.hover22 .portfolio-item-infos.has-icon {
+  flex-direction: row;
+}
+
+.elpt-portfolio-content.hover22 .portfolio-item-infos.has-icon .portfolio-item-icon-wrapper {
+  order: 2;
+}
+
+.elpt-portfolio-content.hover22 .portfolio-item-infos.has-icon .portfolio-item-text-content {
+  order: 1;
+}
+
+/* Text right = icon left (using Elementor's inline style) */
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper[style*="text-align: right"] .portfolio-item-infos.has-icon {
+  flex-direction: row-reverse;
+}
+
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper[style*="text-align: right"] .portfolio-item-infos.has-icon .portfolio-item-icon-wrapper {
+  order: 1;
+}
+
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper[style*="text-align: right"] .portfolio-item-infos.has-icon .portfolio-item-text-content {
+  order: 2;
+  text-align: right;
+}
+
+/* Text center = icon on top (standard behavior) */
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper[style*="text-align: center"] .portfolio-item-infos.has-icon {
+  flex-direction: column;
+  align-items: center;
+}
+
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper[style*="text-align: center"] .portfolio-item-infos.has-icon .portfolio-item-icon-wrapper {
+  order: 1;
+  margin-bottom: 10px;
+}
+
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper[style*="text-align: center"] .portfolio-item-infos.has-icon .portfolio-item-text-content {
+  order: 2;
+  text-align: center;
+}
+
 .element-hsize-1 {
   height: 279px;
 }
@@ -1749,8 +1989,55 @@
 .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item-wrapper:nth-child(11) {
   width: 66.66%;
 }
+/* Special Grid 7 - Alternate Rows 1 - Custom Pattern Grid with fitRows */
+/* Pattern: 3x33% (row 1), 1x60% (row 2), 2x50% (row 3), repeats every 6 items */
+/* Uses fitRows layout mode to prevent item climbing */
+/* IMPORTANT: This grid uses fixed height. For Additional Margin vertical spacing, */
+/* use margin-bottom instead of padding-bottom in Elementor widget selectors. */
+/* See portfolio_widget.php line 416 for implementation example. */
+.elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper {
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 279px;
+}
+.elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper * {
+  box-sizing: border-box;
+}
+.elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper .portfolio-item {
+  height: 279px;
+}
+@media (min-width: 768px) {
+  .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper {
+    width: 50%;
+  }
+}
+@media (min-width:992px) {
+  /* Row type 1: Default 33.33% width (items 1, 2, 3, 7, 8, 9, etc) */
+  .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper {
+    width: 33.33%;
+  }
+  /* Row type 2: 60% width items (4th, 10th, 16th, etc - every 6n+4) - Centered */
+  .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper:nth-child(6n+4) {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  /* Row type 3: 50% width items (5th & 6th, 11th & 12th, etc - every 6n+5 and 6n) */
+  .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper:nth-child(6n+5),
+  .elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper:nth-child(6n) {
+    width: 50%;
+  }
+}
+.elpt-portfolio-content.elpt-portfolio-special-grid-7 .portfolio-item-wrapper img {
+  display: none;
+}
 .elpt-portfolio-content.elpt-portfolio-grid-builder.elpt-portfolio-margin {
-  padding: 5px !important;
+  /* padding: 5px !important; */
   margin-bottom: 5px;
 }
 .elpt-portfolio-content.elpt-portfolio-grid-builder .portfolio-item-wrapper {
@@ -1762,6 +2049,9 @@
 .elpt-portfolio-content.elpt-portfolio-grid-builder .portfolio-item-wrapper img {
   display: none;
 }
+/* Fixed Layout Mode - Items take template positions */
+/* JavaScript adds .elpt-grid-pos-N classes to visible items */
+/* CSS for these classes is generated by Elementor controls */
 .elpt-portfolio-content.elpt-portfolio-carousel .owl-dots button,
 .elpt-portfolio-content.elpt-portfolio-carousel .owl-nav button {
   display: inline-block;

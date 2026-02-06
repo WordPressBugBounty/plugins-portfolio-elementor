@@ -1,13 +1,16 @@
 <?php
 
 /*
-Plugin Name: Portfolio & Image Gallery for Elementor | PowerFolio
+Plugin Name: PowerFolio - Portfolio & Image Gallery for Elementor
 Plugin URI: https://powerfoliowp.com
 Description: Create portfolios and image galleries in seconds using Elementor, Gutenberg blocks, or any page builder!
 Author: PWR Plugins
-Text Domain: powerfolio
-Version: 3.2.1
 Author URI: https://dotrex.co
+Text Domain: portfolio-elementor
+Domain Path: /languages
+Version: 3.2.5
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) {
@@ -102,7 +105,7 @@ if ( function_exists( 'pe_fs' ) ) {
         /*
          * Review
          */
-        update_option( "elpt-installDate", date( 'Y-m-d h:i:s' ) );
+        update_option( "elpt-installDate", gmdate( 'Y-m-d H:i:s' ) );
         if ( is_admin() ) {
             require_once 'classes/Powerfolio_Feedback_Notice.php';
         }
@@ -112,7 +115,7 @@ if ( function_exists( 'pe_fs' ) ) {
         //Create Elementor Category
         function elpug_powerups_cat() {
             \Elementor\Plugin::$instance->elements_manager->add_category( 'elpug-elements', [
-                'title' => __( 'Powerfolio / Power-Ups for Elementor', 'elpug' ),
+                'title' => __( 'Powerfolio / Power-Ups for Elementor', 'portfolio-elementor' ),
                 'icon'  => 'fa fa-plug',
             ], 2 );
         }
@@ -152,10 +155,10 @@ if ( !function_exists( 'elpt_fix_packery_layout_themes' ) ) {
     } );
 }
 //load textdomain
-if ( !function_exists( 'powerfolio_load_textdomain' ) ) {
-    function powerfolio_load_textdomain() {
-        load_plugin_textdomain( 'powerfolio', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+if ( !function_exists( 'portfolio_elementor_load_textdomain' ) ) {
+    function portfolio_elementor_load_textdomain() {
+        load_plugin_textdomain( 'portfolio-elementor', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
-    add_action( 'plugins_loaded', 'powerfolio_load_textdomain' );
+    add_action( 'plugins_loaded', 'portfolio_elementor_load_textdomain' );
 }
