@@ -266,7 +266,7 @@
 		 * @return bool
 		 */
 		function can_use_premium_code__premium_only() {
-			return apply_filters( 'elpt-test-pro-version-filter', $this->is_premium() && $this->can_use_premium_code() ) ;
+			return $this->is_premium() && $this->can_use_premium_code();
 		}
 
 		#endregion

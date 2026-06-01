@@ -3,7 +3,7 @@ import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import './editor.scss';
 
 // Additional Imports
-import { ServerSideRender } from '@wordpress/editor';
+import ServerSideRender from '@wordpress/server-side-render';
 import { SelectControl, Button, PanelBody, FormTokenField, ToggleControl, RangeControl, TextControl, ColorPicker, BaseControl, TextareaControl } from '@wordpress/components';
 import { MediaUpload, MediaUploadCheck, URLInput } from '@wordpress/block-editor';
 import { useState, useEffect, RawHTML } from '@wordpress/element'; 

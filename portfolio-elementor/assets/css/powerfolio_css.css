@@ -1704,6 +1704,36 @@
   text-align: center;
 }
 
+/* ==========================================================================
+   STYLE 22: Clickable text link (content-below link wrapper)
+   Makes the title, category, and icon clickable in content-below layouts
+   ========================================================================== */
+
+/* Link wrapper - inherits text color and preserves layout */
+.elpt-portfolio-content.hover22 .elpt-content-below-link {
+  color: inherit;
+  text-decoration: none;
+  display: block; /* Fallback for older browsers */
+}
+
+/* Modern browsers: use display: contents to not affect flexbox layout */
+@supports (display: contents) {
+  .elpt-portfolio-content.hover22 .elpt-content-below-link {
+    display: contents;
+  }
+}
+
+/* Ensure no text decoration on hover */
+.elpt-portfolio-content.hover22 .elpt-content-below-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Cursor pointer for all clickable elements */
+.elpt-portfolio-content.hover22 .portfolio-item-infos-wrapper {
+  cursor: pointer;
+}
+
 .element-hsize-1 {
   height: 279px;
 }

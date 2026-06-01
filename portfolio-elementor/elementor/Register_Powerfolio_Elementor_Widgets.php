@@ -36,7 +36,7 @@ class Register_Powerfolio_Elementor_Widgets {
 	 * @access private
 	 */
 	private function add_actions() {
-		add_action( 'elementor/widgets/widgets_registered', [ $this, 'on_widgets_registered' ] );
+		add_action( 'elementor/widgets/register', [ $this, 'on_widgets_registered' ] );
 
 		add_action( 'elementor/frontend/before_register_scripts', function() {
 			

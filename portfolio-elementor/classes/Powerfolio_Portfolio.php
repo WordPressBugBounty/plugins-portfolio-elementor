@@ -150,6 +150,9 @@ class Powerfolio_Portfolio {
 
 		//Custom CSS
 		wp_enqueue_style( 'elpt-portfolio-css', $assets_dir .  'assets/css/powerfolio_css.css', array(), '3.2.2' );
+
+		// Allow addons to enqueue their scripts after PowerFolio scripts are loaded
+		do_action( 'powerfolio_after_scripts_enqueued', $assets_dir );
 	}
 
 	/*
@@ -838,7 +841,25 @@ class Powerfolio_Portfolio {
 
 		// Process global item icon from settings (for portfolio widget)
 		// This is set globally and applies to all items
-		if ( !isset($data['item_icon']) && isset($settings['item_icon']) && !empty($settings['item_icon']['value']) ) {
+		// Robust check to handle different icon structures from Elementor:
+		// - Font Awesome: ['value' => 'fas fa-star', 'library' => 'fa-solid']
+		// - SVG Upload: ['value' => ['url' => '...', 'id' => 123], 'library' => 'svg']
+		// - Empty: [] or ['value' => '', 'library' => '']
+		$icon_value = isset($settings['item_icon']) ? $settings['item_icon'] : null;
+		$has_valid_icon = false;
+
+		if (is_array($icon_value) && isset($icon_value['value'])) {
+			// Font Awesome structure: value is a string
+			if (is_string($icon_value['value']) && !empty($icon_value['value'])) {
+				$has_valid_icon = true;
+			}
+			// SVG structure: value is an array with 'url' key
+			elseif (is_array($icon_value['value']) && !empty($icon_value['value']['url'])) {
+				$has_valid_icon = true;
+			}
+		}
+
+		if (!isset($data['item_icon']) && $has_valid_icon) {
 			$data['item_icon'] = $settings['item_icon'];
 		}
 
@@ -961,9 +982,38 @@ class Powerfolio_Portfolio {
 			$icon_html = self::render_item_icon($data['item_icon']);
 		}
 
+		// For content-below layouts, prepare link wrapper so text/icon are clickable
+		// This creates a secondary link with all the same attributes as the image link
+		$link_open = '';
+		$link_close = '';
+
+		if ($is_content_below && isset($data['link_data']['link']) && !empty($data['link_data']['link'])) {
+			// Build video data attribute if exists
+			$video_attr = '';
+			if (isset($data['link_data']['portfolio_link_data_video'])) {
+				$video_attr = ' ' . $data['link_data']['portfolio_link_data_video'];
+			}
+
+			// Build link with all necessary attributes for parity with image link
+			// aria-hidden and tabindex=-1 to avoid duplicate link announcements for screen readers
+			$link_open = sprintf(
+				'<a href="%s" class="elpt-content-below-link %s" %s %s %s%s aria-hidden="true" tabindex="-1">',
+				esc_url($data['link_data']['link']),
+				esc_attr($data['link_data']['class']),
+				$data['link_data']['rel'],
+				$data['link_data']['target'],
+				$data['link_data']['follow'],
+				$video_attr
+			);
+			$link_close = '</a>';
+		}
+
 		// Add modifier class when icon is present for CSS targeting
 		$infos_class = !empty($icon_html) ? 'portfolio-item-infos has-icon' : 'portfolio-item-infos';
 		$output .= '<div class="portfolio-item-infos-wrapper" style="background-color:' . ';"><div class="' . $infos_class . '">';
+
+			// Open link wrapper for content-below (makes text/icon clickable)
+			$output .= $link_open;
 
 			// For content-below layouts: icon and text content are siblings for flexbox layout
 			if ( $is_content_below && !empty($icon_html) ) {
@@ -1004,6 +1054,9 @@ class Powerfolio_Portfolio {
 			if ( $is_content_below && !empty($icon_html) ) {
 				$output .= '</div>'; // Close .portfolio-item-text-content
 			}
+
+			// Close link wrapper for content-below
+			$output .= $link_close;
 
 		$output .= '</div></div>';
 
@@ -1078,7 +1131,14 @@ class Powerfolio_Portfolio {
 				//Filter
 				$output .= self::get_grid_filter($settings, $widget);
 
-				$output .= '<div class="elpt-portfolio-content ' . $settings['portfolio_isotope'] . ' ' . $settings['portfoliostyle'] . ' ' . $settings['zoom_effect'] . ' ' . $settings['hover'] . ' ' . $settings['portfoliocolumns'] . ' ' . $settings['portfoliocolumns_mobile'] . ' ' . $settings['portfoliomargin'] . '">';
+				// Items per page for pagination, delivered as a data attribute so it
+				// works in every context (shortcode + Elementor) and per container.
+				$pagination_attr = '';
+				if ( isset($settings['pagination']) && $settings['pagination'] == 'true' && ! empty($settings['pagination_postsperpage']) ) {
+					$pagination_attr = ' data-items-per-page="' . esc_attr($settings['pagination_postsperpage']) . '"';
+				}
+
+				$output .= '<div class="elpt-portfolio-content ' . $settings['portfolio_isotope'] . ' ' . $settings['portfoliostyle'] . ' ' . $settings['zoom_effect'] . ' ' . $settings['hover'] . ' ' . $settings['portfoliocolumns'] . ' ' . $settings['portfoliocolumns_mobile'] . ' ' . $settings['portfoliomargin'] . '"' . $pagination_attr . '>';
 
 				foreach ($portfolio_items as $post) {
 					$output .= self::get_single_item_output((array)$post, $settings, $widget);

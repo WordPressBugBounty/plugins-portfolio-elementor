@@ -3,7 +3,7 @@ import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import './editor.scss';
 
 // Additional Imports
-import { ServerSideRender } from '@wordpress/editor';
+import ServerSideRender from '@wordpress/server-side-render';
 import { SelectControl, PanelBody, FormTokenField, ToggleControl, RangeControl, TextControl, ColorPicker, BaseControl } from '@wordpress/components';
 import { useState, useEffect, RawHTML } from '@wordpress/element'; 
 import { useInstanceId } from "@wordpress/compose";

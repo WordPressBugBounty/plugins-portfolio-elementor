@@ -16,7 +16,7 @@ function powerfolio_elementor_load() {
 	}
 
 	// Check required version
-	$elementor_version_required = '1.8.0';
+	$elementor_version_required = '3.5.0';
 	if ( ! version_compare( ELEMENTOR_VERSION, $elementor_version_required, '>=' ) ) {
 		add_action( 'admin_notices', 'powerfolio_elementor_fail_load_out_of_date' );
 		return;
@@ -29,7 +29,7 @@ add_action( 'plugins_loaded', 'powerfolio_elementor_load' );
 
 
 function powerfolio_elementor_fail_load_out_of_date() {
-	if ( ! current_user_can( 'update_plugins' ) ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 

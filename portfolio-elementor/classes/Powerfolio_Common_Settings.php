@@ -96,15 +96,15 @@ class Powerfolio_Common_Settings {
 
     public static function get_upgrade_message( $source = '' ) {
         $raw = '';
-        $raw .= '<div style="border: 1px solid #eee; padding: 10px; background: #eee; border-radius: 6px;">';
-        $raw .= '<h3 style="font-weight: bold; tet-transform: uppercase; font-size: 14px; margin-bottom: 10px; text-trasnform: uppercase;">' . __( 'ENABLE ALL FEATURES', 'portfolio-elementor' ) . '</h3>';
-        $raw .= '<p style="margin-bottom: 10px; font-size: 12px; line-heigh: 22px;">' . __( 'Upgrade your plugin to PRO version and unlock all features!', 'portfolio-elementor' ) . '</p>';
+        $raw .= '<div style="border: 1px solid #d5d8dc; padding: 10px; background: #eee; border-radius: 6px; color: #1e1e1e;">';
+        $raw .= '<h3 style="font-weight: bold; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; color: #1e1e1e;">' . __( 'ENABLE ALL FEATURES', 'portfolio-elementor' ) . '</h3>';
+        $raw .= '<p style="margin-bottom: 10px; font-size: 12px; line-height: 22px; color: #1e1e1e;">' . __( 'Upgrade your plugin to PRO version and unlock all features!', 'portfolio-elementor' ) . '</p>';
         $raw .= '<a href="' . pe_fs()->get_upgrade_url() . '" style="background: #ea0e59; color: #fff; font-weight: bold; padding: 5px 10px; border-radius: 3px; display: inline-block; font-size: 14px; text-transform: uppercase;">' . __( 'Click here to Upgrade', 'portfolio-elementor' ) . '</a>';
         //$raw .='<hr style="margin-top: 20px; margin-bottom: 20px;">';
         if ( $source == 'elementor' ) {
-            $raw .= '<p style="margin-bottom: 10px; font-size: 12px; font-style: italic; margin-top: 5px;">' . __( 'Get access to the Paginated Grid (NEW), Special Grids, Grid Builder, extra CSS effects, several customization options and much more!', 'portfolio-elementor' ) . '</p>';
+            $raw .= '<p style="margin-bottom: 10px; font-size: 12px; font-style: italic; margin-top: 5px; color: #1e1e1e;">' . __( 'Get access to the Paginated Grid (NEW), Special Grids, Grid Builder, extra CSS effects, several customization options and much more!', 'portfolio-elementor' ) . '</p>';
         } else {
-            $raw .= '<p style="margin-bottom: 10px; font-size: 12px; font-style: italic; margin-top: 5px;">' . __( 'Get access to the Paginated Grid (NEW), Special Grids, extra CSS effects, several customization options and much more!', 'portfolio-elementor' ) . '</p>';
+            $raw .= '<p style="margin-bottom: 10px; font-size: 12px; font-style: italic; margin-top: 5px; color: #1e1e1e;">' . __( 'Get access to the Paginated Grid (NEW), Special Grids, extra CSS effects, several customization options and much more!', 'portfolio-elementor' ) . '</p>';
         }
         /*$raw .='<ul style="list-style-type: circle; list-style-position: outside; font-style: italic;">';
         			$raw .='<li style="margin-bottom: 5px;">'.__('- Grid Builder', 'portfolio-elementor').'</li>';

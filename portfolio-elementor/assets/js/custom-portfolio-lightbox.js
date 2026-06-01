@@ -206,17 +206,14 @@ jQuery(window).on('load', function () {
             })
             .appendTo('body');
             
-        // Create video container
+        // Create video container (responsive size computed in sizeVideoContainer)
         var videoContainer = jQuery('<div id="elpt-video-container"></div>')
             .css({
                 'position': 'relative',
-                'width': '80%',
-                'max-width': '900px',
-                'padding-top': '56.25%', // Aspect ratio 16:9
                 'box-sizing': 'border-box'
             })
             .appendTo(overlay);
-            
+
         // Create video iframe
         var iframe = jQuery('<iframe></iframe>')
             .attr({
@@ -233,38 +230,67 @@ jQuery(window).on('load', function () {
                 'height': '100%'
             })
             .appendTo(videoContainer);
-            
-        // Create close button
+
+        // Size the container to fit the viewport while keeping a 16:9 ratio.
+        // Constrained by both width (90vw, max 900px) and height (90vh) so it
+        // never overflows on mobile or with vertical videos. Recomputed on resize.
+        function sizeVideoContainer() {
+            var maxWidth = Math.min(window.innerWidth * 0.9, 900);
+            var maxHeight = window.innerHeight * 0.9;
+            var width = maxWidth;
+            var height = width * 9 / 16;
+            if (height > maxHeight) {
+                height = maxHeight;
+                width = height * 16 / 9;
+            }
+            videoContainer.css({
+                'width': Math.round(width) + 'px',
+                'height': Math.round(height) + 'px'
+            });
+        }
+        sizeVideoContainer();
+
+        // Create close button, fixed to the viewport so it is always visible/tappable
         var closeButton = jQuery('<div id="elpt-video-close">×</div>')
             .css({
-                'position': 'absolute',
-                'top': '-40px',
-                'right': '0',
+                'position': 'fixed',
+                'top': '12px',
+                'right': '16px',
+                'width': '44px',
+                'height': '44px',
+                'line-height': '44px',
+                'text-align': 'center',
                 'color': 'white',
-                'font-size': '30px',
+                'font-size': '34px',
                 'cursor': 'pointer',
                 'z-index': 10000
             })
-            .appendTo(videoContainer);
-            
-        // Add click event to close lightbox
-        closeButton.on('click', function() {
+            .appendTo(overlay);
+
+        function closeVideoLightbox() {
             overlay.remove();
-        });
-        
+            jQuery(window).off('resize.elptVideo orientationchange.elptVideo');
+            jQuery(document).off('keydown.elptVideo');
+        }
+
+        // Add click event to close lightbox
+        closeButton.on('click', closeVideoLightbox);
+
         // Close lightbox when clicking outside video
         overlay.on('click', function(e) {
             if (e.target === this) {
-                overlay.remove();
+                closeVideoLightbox();
             }
         });
-        
+
         // Close lightbox when pressing ESC
         jQuery(document).on('keydown.elptVideo', function(e) {
             if (e.keyCode === 27) { // ESC key
-                overlay.remove();
-                jQuery(document).off('keydown.elptVideo');
+                closeVideoLightbox();
             }
         });
+
+        // Recompute size on viewport changes (resize / device rotation)
+        jQuery(window).on('resize.elptVideo orientationchange.elptVideo', sizeVideoContainer);
     }
 });

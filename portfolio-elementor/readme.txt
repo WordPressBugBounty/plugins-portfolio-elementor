@@ -2,10 +2,10 @@
 Contributors: rexdot, wppug, dotrex, freemius
 Donate link: 
 Tags: portfolio, responsive portfolio, image gallery, gallery, elementor
-Requires at least: 4.0
-Tested up to: 6.9
+Requires at least: 5.0
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.2.5
+Stable tag: 3.2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,3 +180,4 @@ You can customize it using these options:
 3.2.3 - Security Hotfix
 3.2.4 - Added responsive controls for Grid Builder (PRO) / Added pixel support for border radius controls / Fixed Grid Builder mobile compatibility / Added Custom vs Automatic mobile layout modes / Improved CSS specificity and box-sizing for Grid Builder
 3.2.5 - Added new grid: Alternate Rows 1 (PRO) / Grid Builder Improvements (PRO)  / Added pagination for grid builder and custom grids (PRO) / Small code improvements
+3.2.7 - IMPORTANT: now requires Elementor 3.5 or later. Please update Elementor before updating PowerFolio, or your portfolio widgets will stop rendering until Elementor is updated. / WordPress 7.0 compatibility (tested up to 7.0) / Updated deprecated Elementor widget registration APIs / Fixed deprecated ServerSideRender import in Gutenberg blocks / Bumped minimum requirements (WordPress 5.0, Elementor 3.5) / Added pagination support to the Image Gallery widget / Fixed video lightbox size on mobile devices / Fixed upgrade box contrast in the Elementor editor dark mode / Grid Builder & Fixed Layout fixes (race conditions on rapid filter/pagination, resize and filter positioning) / Fixed Style 22 clickable text and icon / Fixed masonry image glitch / Added item icon control / Added integration hooks for addons

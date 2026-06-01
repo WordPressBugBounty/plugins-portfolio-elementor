@@ -8,7 +8,10 @@ Author: PWR Plugins
 Author URI: https://dotrex.co
 Text Domain: portfolio-elementor
 Domain Path: /languages
-Version: 3.2.5
+Version: 3.2.7
+Requires Plugins: elementor
+Elementor tested up to: 4.1
+Elementor Pro tested up to: 4.1
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -29,20 +32,21 @@ if ( function_exists( 'pe_fs' ) ) {
                 // Include Composer autoloader
                 require_once dirname( __FILE__ ) . '/vendor/autoload.php';
                 $pe_fs = fs_dynamic_init( array(
-                    'id'             => '7226',
-                    'slug'           => 'portfolio-elementor',
-                    'premium_slug'   => 'portfolio-elementor-pro',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_75702ac7c5c10d2bfd4880c1c8039',
-                    'is_premium'     => false,
-                    'premium_suffix' => 'PRO',
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'menu'           => array(
+                    'id'               => '7226',
+                    'slug'             => 'portfolio-elementor',
+                    'premium_slug'     => 'portfolio-elementor-pro',
+                    'type'             => 'plugin',
+                    'public_key'       => 'pk_75702ac7c5c10d2bfd4880c1c8039',
+                    'is_premium'       => false,
+                    'premium_suffix'   => 'PRO',
+                    'has_addons'       => false,
+                    'has_paid_plans'   => true,
+                    'menu'             => array(
                         'slug'       => 'elementor_portfolio',
                         'first-path' => 'admin.php?page=elementor_portfolio',
                     ),
-                    'is_live'        => true,
+                    'is_live'          => true,
+                    'is_org_compliant' => true,
                 ) );
             }
             return $pe_fs;

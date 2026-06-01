@@ -271,9 +271,9 @@ class ELPT_Image_Gallery_Widget extends Widget_Base {
             ],
         ] );
         //================================== GRID BUILDER ========================
-        // Note: Image Gallery uses a Repeater for items, so we show all 25 controls
+        // Note: Image Gallery uses a Repeater for items, so we show all 30 controls
         // when grid_builder is active. Users control the number of items via the Repeater.
-        for ($i = 1; $i <= 25; $i++) {
+        for ($i = 1; $i <= 30; $i++) {
             //width
             $item = 'item_' . $i;
             $this->add_control( $item . '_popover_toggle', [
