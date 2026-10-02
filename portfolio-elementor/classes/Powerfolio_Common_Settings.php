@@ -163,4 +163,304 @@ class Powerfolio_Common_Settings {
         );
     }
 
+    /**
+     * Sanitize a CSS color value.
+     * Accepts hex colors (3, 4, 6, or 8 digits), rgb(), rgba(), hsl(), hsla(), 
+     * CSS named colors, and special values like 'transparent' and 'inherit'.
+     *
+     * @param string $color The color value to sanitize.
+     * @param string $default Default value if sanitization fails.
+     * @return string Sanitized color or default value.
+     */
+    public static function sanitize_css_color( $color, $default = '' ) {
+        if ( empty( $color ) || !is_string( $color ) ) {
+            return $default;
+        }
+        $color = trim( $color );
+        // Check for hex color (3, 4, 6, or 8 digits)
+        if ( preg_match( '/^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/', $color ) ) {
+            return $color;
+        }
+        // Check for rgb() or rgba() - allow integers 0-255 and percentages
+        if ( preg_match( '/^rgba?\\(\\s*(\\d{1,3}%?\\s*,\\s*){2}\\d{1,3}%?\\s*(,\\s*(0|1|0?\\.\\d+))?\\s*\\)$/i', $color ) ) {
+            return $color;
+        }
+        // Check for hsl() or hsla()
+        if ( preg_match( '/^hsla?\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*(,\\s*(0|1|0?\\.\\d+))?\\s*\\)$/i', $color ) ) {
+            return $color;
+        }
+        // CSS named colors allowlist (common colors)
+        $named_colors = array(
+            'transparent',
+            'inherit',
+            'initial',
+            'unset',
+            'currentcolor',
+            'aliceblue',
+            'antiquewhite',
+            'aqua',
+            'aquamarine',
+            'azure',
+            'beige',
+            'bisque',
+            'black',
+            'blanchedalmond',
+            'blue',
+            'blueviolet',
+            'brown',
+            'burlywood',
+            'cadetblue',
+            'chartreuse',
+            'chocolate',
+            'coral',
+            'cornflowerblue',
+            'cornsilk',
+            'crimson',
+            'cyan',
+            'darkblue',
+            'darkcyan',
+            'darkgoldenrod',
+            'darkgray',
+            'darkgrey',
+            'darkgreen',
+            'darkkhaki',
+            'darkmagenta',
+            'darkolivegreen',
+            'darkorange',
+            'darkorchid',
+            'darkred',
+            'darksalmon',
+            'darkseagreen',
+            'darkslateblue',
+            'darkslategray',
+            'darkslategrey',
+            'darkturquoise',
+            'darkviolet',
+            'deeppink',
+            'deepskyblue',
+            'dimgray',
+            'dimgrey',
+            'dodgerblue',
+            'firebrick',
+            'floralwhite',
+            'forestgreen',
+            'fuchsia',
+            'gainsboro',
+            'ghostwhite',
+            'gold',
+            'goldenrod',
+            'gray',
+            'grey',
+            'green',
+            'greenyellow',
+            'honeydew',
+            'hotpink',
+            'indianred',
+            'indigo',
+            'ivory',
+            'khaki',
+            'lavender',
+            'lavenderblush',
+            'lawngreen',
+            'lemonchiffon',
+            'lightblue',
+            'lightcoral',
+            'lightcyan',
+            'lightgoldenrodyellow',
+            'lightgray',
+            'lightgrey',
+            'lightgreen',
+            'lightpink',
+            'lightsalmon',
+            'lightseagreen',
+            'lightskyblue',
+            'lightslategray',
+            'lightslategrey',
+            'lightsteelblue',
+            'lightyellow',
+            'lime',
+            'limegreen',
+            'linen',
+            'magenta',
+            'maroon',
+            'mediumaquamarine',
+            'mediumblue',
+            'mediumorchid',
+            'mediumpurple',
+            'mediumseagreen',
+            'mediumslateblue',
+            'mediumspringgreen',
+            'mediumturquoise',
+            'mediumvioletred',
+            'midnightblue',
+            'mintcream',
+            'mistyrose',
+            'moccasin',
+            'navajowhite',
+            'navy',
+            'oldlace',
+            'olive',
+            'olivedrab',
+            'orange',
+            'orangered',
+            'orchid',
+            'palegoldenrod',
+            'palegreen',
+            'paleturquoise',
+            'palevioletred',
+            'papayawhip',
+            'peachpuff',
+            'peru',
+            'pink',
+            'plum',
+            'powderblue',
+            'purple',
+            'rebeccapurple',
+            'red',
+            'rosybrown',
+            'royalblue',
+            'saddlebrown',
+            'salmon',
+            'sandybrown',
+            'seagreen',
+            'seashell',
+            'sienna',
+            'silver',
+            'skyblue',
+            'slateblue',
+            'slategray',
+            'slategrey',
+            'snow',
+            'springgreen',
+            'steelblue',
+            'tan',
+            'teal',
+            'thistle',
+            'tomato',
+            'turquoise',
+            'violet',
+            'wheat',
+            'white',
+            'whitesmoke',
+            'yellow',
+            'yellowgreen'
+        );
+        if ( in_array( strtolower( $color ), $named_colors, true ) ) {
+            return strtolower( $color );
+        }
+        return $default;
+    }
+
+    /**
+     * Sanitize CSS text-transform property value.
+     *
+     * @param string $value The text-transform value to sanitize.
+     * @param string $default Default value if sanitization fails.
+     * @return string Sanitized value or default.
+     */
+    public static function sanitize_css_text_transform( $value, $default = '' ) {
+        if ( empty( $value ) || !is_string( $value ) ) {
+            return $default;
+        }
+        $allowed = array(
+            'none',
+            'capitalize',
+            'uppercase',
+            'lowercase',
+            'full-width',
+            'full-size-kana',
+            'inherit',
+            'initial',
+            'revert',
+            'revert-layer',
+            'unset'
+        );
+        $value = strtolower( trim( $value ) );
+        if ( in_array( $value, $allowed, true ) ) {
+            return $value;
+        }
+        return $default;
+    }
+
+    /**
+     * Sanitize CSS text-align property value.
+     *
+     * @param string $value The text-align value to sanitize.
+     * @param string $default Default value if sanitization fails.
+     * @return string Sanitized value or default.
+     */
+    public static function sanitize_css_text_align( $value, $default = '' ) {
+        if ( empty( $value ) || !is_string( $value ) ) {
+            return $default;
+        }
+        $allowed = array(
+            'left',
+            'right',
+            'center',
+            'justify',
+            'start',
+            'end',
+            'inherit',
+            'initial',
+            'revert',
+            'revert-layer',
+            'unset'
+        );
+        $value = strtolower( trim( $value ) );
+        if ( in_array( $value, $allowed, true ) ) {
+            return $value;
+        }
+        return $default;
+    }
+
+    /**
+     * Sanitize an element ID or CSS class name.
+     * Only allows alphanumeric characters, underscores, and hyphens.
+     *
+     * @param string $id The element ID to sanitize.
+     * @param string $default Default value if sanitization fails.
+     * @return string Sanitized ID or default.
+     */
+    public static function sanitize_element_id( $id, $default = '' ) {
+        if ( empty( $id ) || !is_string( $id ) ) {
+            return $default;
+        }
+        // Only allow alphanumeric, underscore, and hyphen
+        $sanitized = preg_replace( '/[^a-zA-Z0-9_-]/', '', $id );
+        // Must start with a letter or underscore (valid CSS identifier)
+        if ( empty( $sanitized ) || !preg_match( '/^[a-zA-Z_]/', $sanitized ) ) {
+            return $default;
+        }
+        return $sanitized;
+    }
+
+    /**
+     * Sanitize a numeric value for CSS (integers only).
+     * Returns the integer value or default if not numeric.
+     *
+     * @param mixed $value The value to sanitize.
+     * @param int $default Default value if sanitization fails.
+     * @param int $min Minimum allowed value (optional).
+     * @param int $max Maximum allowed value (optional).
+     * @return int Sanitized integer value.
+     */
+    public static function sanitize_css_number(
+        $value,
+        $default = 0,
+        $min = null,
+        $max = null
+    ) {
+        if ( !is_numeric( $value ) ) {
+            return $default;
+        }
+        $number = intval( $value );
+        if ( $min !== null && $number < $min ) {
+            return $default;
+        }
+        if ( $max !== null && $number > $max ) {
+            return $default;
+        }
+        return $number;
+    }
+
 }

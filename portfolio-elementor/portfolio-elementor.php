@@ -8,7 +8,7 @@ Author: PWR Plugins
 Author URI: https://dotrex.co
 Text Domain: portfolio-elementor
 Domain Path: /languages
-Version: 3.2.7
+Version: 3.2.8
 Requires Plugins: elementor
 Elementor tested up to: 4.1
 Elementor Pro tested up to: 4.1

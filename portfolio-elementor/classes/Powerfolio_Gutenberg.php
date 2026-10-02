@@ -49,27 +49,53 @@ class Powerfolio_Gutenberg {
         $hover = isset($attributes['hover']) ? $attributes['hover'] : 'hover1';
         $columns = isset($attributes['columns']) ? $attributes['columns'] : '3';
         $postsperpage = isset($attributes['postsperpage']) ? $attributes['postsperpage'] : '12';
-        $type = $attributes['type'];
-        $showfilter = $attributes['showfilter'] ? 'true' : 'false';
-        $showallbtn = $attributes['showallbtn'] ? 'true' : 'false';
+        $type = isset($attributes['type']) ? $attributes['type'] : false;
+        $showfilter = ! empty( $attributes['showfilter'] ) ? 'true' : 'false';
+        $showallbtn = ! empty( $attributes['showallbtn'] ) ? 'true' : 'false';
         $tax_text = isset($attributes['tax_text']) ? $attributes['tax_text'] : '';
         $style = isset($attributes['style']) ? $attributes['style'] : 'box';
-        $margin = $attributes['margin'] ? 'true' : 'false';
+        $margin = ! empty( $attributes['margin'] ) ? 'true' : 'false';
         $linkto = isset($attributes['linkto']) ? $attributes['linkto'] : 'lightbox';
         $post_type = isset($attributes['post_type']) ? $attributes['post_type'] : 'elemenfolio';
-        $taxonomy = isset($attributes['taxonomy']) ? $attributes['taxonomy'] : '';
+        $taxonomy = isset($attributes['taxonomy']) ? $attributes['taxonomy'] : array();
 
         // Generate the CSS
-        $css = self::generate_css_for_block($attributes, $element_id);               
+        $css = self::generate_css_for_block($attributes, $element_id);
 
-        foreach ( $taxonomy as $key => $term) {
-            $term = get_term_by('slug', $term, 'elemenfoliocategory');
-            $taxonomy[$key] = $term->term_id;
+        // Process taxonomy terms
+        if ( is_array( $taxonomy ) ) {
+            foreach ( $taxonomy as $key => $term_slug ) {
+                $term = get_term_by('slug', $term_slug, 'elemenfoliocategory');
+                if ( $term && ! is_wp_error( $term ) ) {
+                    $taxonomy[$key] = $term->term_id;
+                } else {
+                    unset( $taxonomy[$key] );
+                }
+            }
+            $taxonomy = implode(",", $taxonomy);
+        } else {
+            $taxonomy = '';
         }
 
-        $taxonomy = implode(",", $taxonomy);
-    
-        return $css.do_shortcode('[powerfolio element_id="'.$element_id.'" hover="' . $hover . '" columns="' . $columns . '" postsperpage="' . $postsperpage . '" type="' . $type . '" showfilter="' . $showfilter . '" showallbtn="' . $showallbtn . '" tax_text="' . $tax_text . '" style="' . $style . '" margin="' . $margin . '" linkto="' . $linkto . '" post_type="' . $post_type . '" taxonomy="' . $taxonomy . '"]');
+        // Build shortcode with properly escaped attributes to prevent injection
+        $shortcode = sprintf(
+            '[powerfolio element_id="%s" hover="%s" columns="%s" postsperpage="%s" type="%s" showfilter="%s" showallbtn="%s" tax_text="%s" style="%s" margin="%s" linkto="%s" post_type="%s" taxonomy="%s"]',
+            esc_attr( Powerfolio_Common_Settings::sanitize_element_id( $element_id ) ),
+            esc_attr( $hover ),
+            esc_attr( $columns ),
+            esc_attr( intval( $postsperpage ) ),
+            esc_attr( $type ),
+            esc_attr( $showfilter ),
+            esc_attr( $showallbtn ),
+            esc_attr( $tax_text ),
+            esc_attr( $style ),
+            esc_attr( $margin ),
+            esc_attr( $linkto ),
+            esc_attr( $post_type ),
+            esc_attr( $taxonomy )
+        );
+
+        return $css . do_shortcode( $shortcode );
 
     }
 
@@ -77,79 +103,118 @@ class Powerfolio_Gutenberg {
         
         $css = '';
 
+        // Sanitize element ID to prevent CSS injection via class name
+        $safe_element_id = Powerfolio_Common_Settings::sanitize_element_id( $element_id );
+        if ( empty( $safe_element_id ) ) {
+            return $css;
+        }
+
         $css .= '<style>';
 
             // BG Color
             if (!empty($attributes['bgColor'])) {
-                $css .= '.'.$element_id.' .portfolio-item-infos-wrapper { background-color: '.$attributes['bgColor'].' !important; }';
+                $bg_color = Powerfolio_Common_Settings::sanitize_css_color( $attributes['bgColor'] );
+                if ( ! empty( $bg_color ) ) {
+                    $css .= '.' . $safe_element_id . ' .portfolio-item-infos-wrapper { background-color: ' . $bg_color . ' !important; }';
+                }
             }
 
             // Margin Size
             if (!empty($attributes['margin_size'])) {
-                $margin_size = intval($attributes['margin_size']);
-                $css .= '.'.$element_id.' .elpt-portfolio-content .portfolio-item-wrapper {';
-                    $css .= 'padding-right: calc(5px + '.$margin_size.'px);';
-                    $css .= 'padding-left: calc(5px + '.$margin_size.'px);';
-                    $css .= 'padding-bottom: calc((5px + '.$margin_size.'px) * 2);';
-                $css .= '}';
+                $margin_size = Powerfolio_Common_Settings::sanitize_css_number( $attributes['margin_size'], 0, 0, 500 );
+                if ( $margin_size > 0 ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content .portfolio-item-wrapper {';
+                        $css .= 'padding-right: calc(5px + ' . $margin_size . 'px);';
+                        $css .= 'padding-left: calc(5px + ' . $margin_size . 'px);';
+                        $css .= 'padding-bottom: calc((5px + ' . $margin_size . 'px) * 2);';
+                    $css .= '}';
+                }
             }
 
             // Box Height
-            if (!empty($attributes['box_height']) && ($attributes['style'] == 'box' || $attributes['style'] == 'specialgrid5' || $attributes['style'] == 'specialgrid6')) {
-                $box_height = intval($attributes['box_height']);
-                $css .= '.'.$element_id.' .elpt-portfolio-content.elpt-portfolio-style-box .portfolio-item,';
-                $css .= '.'.$element_id.' .elpt-portfolio-content.elpt-portfolio-special-grid-5 .portfolio-item-wrapper,';
-                $css .= '.'.$element_id.' .elpt-portfolio-content.elpt-portfolio-special-grid-5 .portfolio-item,';
-                $css .= '.'.$element_id.' .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item-wrapper,';
-                $css .= '.'.$element_id.' .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item {';
-                    $css .= 'height: '.$box_height.'px;';
-                $css .= '}';
+            $style = isset( $attributes['style'] ) ? $attributes['style'] : '';
+            if (!empty($attributes['box_height']) && in_array( $style, array( 'box', 'specialgrid5', 'specialgrid6' ), true ) ) {
+                $box_height = Powerfolio_Common_Settings::sanitize_css_number( $attributes['box_height'], 0, 0, 2000 );
+                if ( $box_height > 0 ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content.elpt-portfolio-style-box .portfolio-item,';
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content.elpt-portfolio-special-grid-5 .portfolio-item-wrapper,';
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content.elpt-portfolio-special-grid-5 .portfolio-item,';
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item-wrapper,';
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content.elpt-portfolio-special-grid-6 .portfolio-item {';
+                        $css .= 'height: ' . $box_height . 'px;';
+                    $css .= '}';
+                }
             }
 
             // Text Transform
             if (!empty($attributes['text_transform'])) {
-                $css .= '.' . $element_id . ' .portfolio-item-infos-wrapper { text-transform: ' . $attributes['text_transform'] . '; }';
+                $text_transform = Powerfolio_Common_Settings::sanitize_css_text_transform( $attributes['text_transform'] );
+                if ( ! empty( $text_transform ) ) {
+                    $css .= '.' . $safe_element_id . ' .portfolio-item-infos-wrapper { text-transform: ' . $text_transform . '; }';
+                }
             }
 
             // Text Align
             if (!empty($attributes['text_align'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-content .portfolio-item-infos-wrapper { text-align: ' . $attributes['text_align'] . '; }';
+                $text_align = Powerfolio_Common_Settings::sanitize_css_text_align( $attributes['text_align'] );
+                if ( ! empty( $text_align ) ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content .portfolio-item-infos-wrapper { text-align: ' . $text_align . '; }';
+                }
             }
 
             // Border Radius
             if (isset($attributes['borderRadius'])) {
-                $border_radius = intval($attributes['borderRadius']);
-                $css .= '.' . $element_id . ' .elpt-portfolio-content .portfolio-item { border-radius: ' . $border_radius . '%; }';
+                $border_radius = Powerfolio_Common_Settings::sanitize_css_number( $attributes['borderRadius'], 0, 0, 100 );
+                $css .= '.' . $safe_element_id . ' .elpt-portfolio-content .portfolio-item { border-radius: ' . $border_radius . '%; }';
             }
 
-            // Border Size
+            // Border Size and Color
             if (!empty($attributes['border_size'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-content .portfolio-item { border: ' . $attributes['border_size'] . 'px solid ' . $attributes['item_bordercolor'] . '; }';
+                $border_size = Powerfolio_Common_Settings::sanitize_css_number( $attributes['border_size'], 0, 0, 100 );
+                $border_color = isset( $attributes['item_bordercolor'] ) ? Powerfolio_Common_Settings::sanitize_css_color( $attributes['item_bordercolor'] ) : '';
+                if ( $border_size > 0 ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content .portfolio-item { border: ' . $border_size . 'px solid' . ( $border_color ? ' ' . $border_color : '' ) . '; }';
+                }
             }
 
-            // Border Color
+            // Border Color (standalone)
             if (!empty($attributes['item_bordercolor'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-content .portfolio-item { border-color: ' . $attributes['item_bordercolor'] . ' !important; }';
+                $border_color = Powerfolio_Common_Settings::sanitize_css_color( $attributes['item_bordercolor'] );
+                if ( ! empty( $border_color ) ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-content .portfolio-item { border-color: ' . $border_color . ' !important; }';
+                }
             }
 
             // Filter: Background color
             if (!empty($attributes['filter_bgcolor'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-filter .portfolio-filter-item { background-color: ' . $attributes['filter_bgcolor'] . '; }';
+                $filter_bgcolor = Powerfolio_Common_Settings::sanitize_css_color( $attributes['filter_bgcolor'] );
+                if ( ! empty( $filter_bgcolor ) ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-filter .portfolio-filter-item { background-color: ' . $filter_bgcolor . '; }';
+                }
             }
 
             // Filter: Background color (active item)
             if (!empty($attributes['filter_bgcolor_active'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-filter .portfolio-filter-item.item-active { background-color: ' . $attributes['filter_bgcolor_active'] . '; }';
+                $filter_bgcolor_active = Powerfolio_Common_Settings::sanitize_css_color( $attributes['filter_bgcolor_active'] );
+                if ( ! empty( $filter_bgcolor_active ) ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-filter .portfolio-filter-item.item-active { background-color: ' . $filter_bgcolor_active . '; }';
+                }
             }
 
             // Filter: Text Transform
             if (!empty($attributes['filter_text_transform'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-filter .portfolio-filter-item { text-transform: ' . $attributes['filter_text_transform'] . '; }';
+                $filter_text_transform = Powerfolio_Common_Settings::sanitize_css_text_transform( $attributes['filter_text_transform'] );
+                if ( ! empty( $filter_text_transform ) ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-filter .portfolio-filter-item { text-transform: ' . $filter_text_transform . '; }';
+                }
             }
 
             // Filter: Border Radius
             if (!empty($attributes['filter_border_radius'])) {
-                $css .= '.' . $element_id . ' .elpt-portfolio-filter .portfolio-filter-item { border-radius: ' . $attributes['filter_border_radius'] . '%; }';
+                $filter_border_radius = Powerfolio_Common_Settings::sanitize_css_number( $attributes['filter_border_radius'], 0, 0, 100 );
+                if ( $filter_border_radius > 0 ) {
+                    $css .= '.' . $safe_element_id . ' .elpt-portfolio-filter .portfolio-filter-item { border-radius: ' . $filter_border_radius . '%; }';
+                }
             }
 
         $css .= '</style>';
